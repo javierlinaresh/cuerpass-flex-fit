@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { User, Search } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,29 +12,29 @@ const Header = () => {
       <div className="container max-w-7xl mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-cuerpass-500 to-coral-500 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">C</span>
             </div>
             <span className="font-display font-bold text-xl text-gray-900">
               Cuerpass
             </span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
+            <Link to="/servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
               Servicios
-            </a>
-            <a href="#precios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
+            </Link>
+            <a href="/#precios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
               Precios
             </a>
-            <a href="#empresas" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
+            <a href="/#empresas" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
               Para Empresas
             </a>
-            <a href="#socios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
+            <Link to="/socios/registro" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
               Únete como Socio
-            </a>
+            </Link>
           </nav>
 
           {/* Desktop Actions */}
@@ -42,12 +43,16 @@ const Header = () => {
               <Search className="w-4 h-4 mr-2" />
               Buscar
             </Button>
-            <Button variant="ghost" size="sm" className="text-gray-600">
-              Iniciar Sesión
-            </Button>
-            <Button className="btn-primary">
-              Registrarse
-            </Button>
+            <Link to="/login">
+              <Button variant="ghost" size="sm" className="text-gray-600">
+                Iniciar Sesión
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button className="btn-primary">
+                Registrarse
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -67,25 +72,29 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-orange-100">
             <nav className="flex flex-col space-y-4">
-              <a href="#servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
+              <Link to="/servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
                 Servicios
-              </a>
-              <a href="#precios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
+              </Link>
+              <a href="/#precios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
                 Precios
               </a>
-              <a href="#empresas" className="text-gray-600 hover:text-cuerpass-600 font-medium">
+              <a href="/#empresas" className="text-gray-600 hover:text-cuerpass-600 font-medium">
                 Para Empresas
               </a>
-              <a href="#socios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
+              <Link to="/socios/registro" className="text-gray-600 hover:text-cuerpass-600 font-medium">
                 Únete como Socio
-              </a>
+              </Link>
               <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="ghost" className="justify-start">
-                  Iniciar Sesión
-                </Button>
-                <Button className="btn-primary">
-                  Registrarse
-                </Button>
+                <Link to="/login">
+                  <Button variant="ghost" className="justify-start w-full">
+                    Iniciar Sesión
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button className="btn-primary w-full">
+                    Registrarse
+                  </Button>
+                </Link>
               </div>
             </nav>
           </div>
