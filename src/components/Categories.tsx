@@ -13,30 +13,30 @@ const categories = [
   },
   {
     id: 2,
-    name: "Spa & Relajación",
-    description: "Masajes, tratamientos faciales y terapias de relajación",
-    icon: "🧘‍♀️",
+    name: "Deportes & Canchas",
+    description: "Reserva canchas de pádel, fútbol, tenis y más deportes",
+    icon: "⚽",
     count: "8 centros",
     color: "bg-green-500",
     gradient: "from-green-400 to-green-600"
   },
   {
     id: 3,
-    name: "Belleza & Estética",
-    description: "Salones de belleza, peluquerías y centros estéticos",
-    icon: "💄",
-    count: "15 centros",
-    color: "bg-pink-500",
-    gradient: "from-pink-400 to-pink-600"
-  },
-  {
-    id: 4,
-    name: "Clases & Entrenamientos",
-    description: "Yoga, pilates, crossfit y entrenamientos grupales",
-    icon: "🤸‍♀️",
+    name: "Spa & Relajación",
+    description: "Masajes, tratamientos faciales y terapias de relajación",
+    icon: "🧘‍♀️",
     count: "6 centros",
     color: "bg-purple-500",
     gradient: "from-purple-400 to-purple-600"
+  },
+  {
+    id: 4,
+    name: "Belleza & Estética",
+    description: "Salones de belleza, peluquerías y centros estéticos",
+    icon: "💄",
+    count: "10 centros",
+    color: "bg-pink-500",
+    gradient: "from-pink-400 to-pink-600"
   }
 ];
 
@@ -49,7 +49,7 @@ const Categories = () => {
             Explora Nuestros Servicios
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Desde entrenamientos intensos hasta relajación total. Encuentra exactamente lo que necesitas para tu bienestar.
+            Desde entrenamientos intensos hasta relajación total, y desde un partido de pádel hasta un día de spa. Encuentra exactamente lo que necesitas para tu bienestar y diversión.
           </p>
         </div>
 
