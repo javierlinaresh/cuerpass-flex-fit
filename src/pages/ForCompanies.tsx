@@ -1,8 +1,9 @@
 import Header from "@/components/Header";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
+import { ArrowRight, Users, TrendingUp, Shield, Award } from "lucide-react";
 
 const ForCompanies = () => {
   const navigate = useNavigate();
@@ -98,7 +99,7 @@ const ForCompanies = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white overflow-x-hidden">
       <Header />
       
       {/* Hero Section */}
@@ -237,28 +238,29 @@ const ForCompanies = () => {
           </div>
         </div>
 
-        {/* CTA Final */}
+        {/* CTA Section */}
         <div className="bg-gradient-to-r from-cuerpass-500 to-coral-500 rounded-2xl text-white p-12 text-center">
           <h2 className="font-display font-bold text-3xl mb-4">
-            ¿Listo para Transformar tu Empresa?
+            ¿Listo para Transformar el Bienestar de tu Equipo?
           </h2>
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-            Únete a las empresas que ya están invirtiendo en el bienestar de su equipo. 
-            Agenda una demo personalizada y descubre cómo Cuerpass puede beneficiar a tu organización.
+            Únete a las empresas que ya están viendo resultados increíbles. 
+            Comienza tu prueba gratuita hoy mismo.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               className="bg-white text-cuerpass-600 hover:bg-gray-100 text-lg px-8 py-3"
-              onClick={() => navigate('/empresas/contacto')}
+              onClick={() => navigate('/contacto')}
             >
-              Solicitar Demo Gratis
+              Empezar Ahora
+              <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
             <Button 
               variant="outline" 
               className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-3"
-              onClick={() => navigate('/empresas/contacto')}
+              onClick={() => navigate('/contacto')}
             >
-              Hablar con Ventas
+              Ver Planes
             </Button>
           </div>
         </div>

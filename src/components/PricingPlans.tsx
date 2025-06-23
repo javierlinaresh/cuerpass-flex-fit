@@ -1,8 +1,8 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const plans = [
   {
@@ -56,6 +56,13 @@ const plans = [
 ];
 
 const PricingPlans = () => {
+  const navigate = useNavigate();
+
+  const handlePlanSelect = (planName: string) => {
+    const planId = planName.toLowerCase().replace('á', 'a');
+    navigate(`/checkout?plan=${planId}`);
+  };
+
   return (
     <section id="precios" className="py-20 bg-white">
       <div className="container max-w-7xl mx-auto px-4">
@@ -141,6 +148,7 @@ const PricingPlans = () => {
                   }`}
                   variant={plan.popular ? "default" : "outline"}
                   size="lg"
+                  onClick={() => handlePlanSelect(plan.name)}
                 >
                   {plan.popular ? 'Comenzar Ahora' : 'Seleccionar Plan'}
                 </Button>
@@ -153,7 +161,11 @@ const PricingPlans = () => {
           <p className="text-gray-600 mb-4">
             ¿Necesitas un plan personalizado para tu empresa?
           </p>
-          <Button variant="outline" className="border-2 border-cuerpass-200 text-cuerpass-700 hover:bg-cuerpass-50">
+          <Button 
+            variant="outline" 
+            className="border-2 border-cuerpass-200 text-cuerpass-700 hover:bg-cuerpass-50"
+            onClick={() => navigate('/empresas')}
+          >
             Hablar con Ventas Corporativas
           </Button>
         </div>

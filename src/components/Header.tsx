@@ -35,7 +35,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
             <Link to="/servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
               Servicios
             </Link>
@@ -46,15 +46,18 @@ const Header = () => {
               Precios
             </a>
             <Link to="/empresas" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
-              Para Empresas
+              Empresas
             </Link>
             <Link to="/socios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
-              Únete como Socio
+              Socios
+            </Link>
+            <Link to="/contacto" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
+              Contacto
             </Link>
           </nav>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
             {isAuthenticated ? (
               <>
                 <Button variant="ghost" size="sm" className="text-gray-600">
@@ -68,16 +71,11 @@ const Header = () => {
                   </Button>
                 </Link>
                 <Button variant="ghost" size="sm" onClick={handleLogout} className="text-gray-600">
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Salir
+                  <LogOut className="w-4 h-4" />
                 </Button>
               </>
             ) : (
               <>
-                <Button variant="ghost" size="sm" className="text-gray-600">
-                  <Search className="w-4 h-4 mr-2" />
-                  Buscar
-                </Button>
                 <Link to="/login">
                   <Button variant="ghost" size="sm" className="text-gray-600">
                     Iniciar Sesión
@@ -108,7 +106,7 @@ const Header = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-orange-100">
-            <nav className="flex flex-col space-y-4">
+            <nav className="flex flex-col space-y-3">
               <Link to="/servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
                 Servicios
               </Link>
@@ -119,10 +117,13 @@ const Header = () => {
                 Precios
               </a>
               <Link to="/empresas" className="text-gray-600 hover:text-cuerpass-600 font-medium">
-                Para Empresas
+                Empresas
               </Link>
               <Link to="/socios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
-                Únete como Socio
+                Socios
+              </Link>
+              <Link to="/contacto" className="text-gray-600 hover:text-cuerpass-600 font-medium">
+                Contacto
               </Link>
               
               {isAuthenticated ? (
