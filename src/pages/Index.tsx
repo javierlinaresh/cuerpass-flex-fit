@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,6 +6,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Categories from "@/components/Categories";
 import FeaturedBusinesses from "@/components/FeaturedBusinesses";
+import TrustedCompanies from "@/components/TrustedCompanies";
 import PricingPlans from "@/components/PricingPlans";
 import Footer from "@/components/Footer";
 
@@ -17,6 +17,7 @@ const Index = () => {
       <Hero />
       <Categories />
       <FeaturedBusinesses />
+      <TrustedCompanies />
       <PricingPlans />
       <Footer />
     </div>

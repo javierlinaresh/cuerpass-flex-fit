@@ -132,7 +132,11 @@ const PartnerDashboard = () => {
                   <CardTitle className="font-display text-xl">
                     Reservas Recientes
                   </CardTitle>
-                  <Button variant="outline" size="sm">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => navigate('/socios/reservas')}
+                  >
                     Ver Todas
                   </Button>
                 </div>
@@ -182,18 +186,23 @@ const PartnerDashboard = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Button className="w-full btn-primary">
+                <Button 
+                  className="w-full btn-primary"
+                  onClick={() => navigate('/socios/horarios')}
+                >
                   Configurar Horarios
                 </Button>
                 <Button 
                   variant="outline" 
                   className="w-full border-2 border-cuerpass-500 text-cuerpass-600"
+                  onClick={() => navigate('/socios/servicios')}
                 >
                   Gestionar Servicios
                 </Button>
                 <Button 
                   variant="ghost" 
                   className="w-full text-gray-600"
+                  onClick={() => navigate('/socios/reportes')}
                 >
                   Ver Estadísticas
                 </Button>
@@ -212,7 +221,10 @@ const PartnerDashboard = () => {
                 <p className="text-sm opacity-90 mb-4">
                   ¡Excelente trabajo! 🎉
                 </p>
-                <Button className="bg-white text-green-600 hover:bg-gray-100 text-sm">
+                <Button 
+                  className="bg-white text-green-600 hover:bg-gray-100 text-sm"
+                  onClick={() => navigate('/socios/reportes')}
+                >
                   Ver Reporte Completo
                 </Button>
               </CardContent>

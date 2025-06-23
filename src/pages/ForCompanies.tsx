@@ -1,10 +1,12 @@
-
 import Header from "@/components/Header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 
 const ForCompanies = () => {
+  const navigate = useNavigate();
+
   const benefits = [
     {
       title: "Bienestar Corporativo",
@@ -114,10 +116,17 @@ const ForCompanies = () => {
             Mejora la productividad, reduce el ausentismo y atrae el mejor talento.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="btn-primary text-lg px-8 py-3">
+            <Button 
+              className="btn-primary text-lg px-8 py-3"
+              onClick={() => navigate('/empresas/contacto')}
+            >
               Solicitar Demo
             </Button>
-            <Button variant="outline" className="text-lg px-8 py-3 border-2 border-cuerpass-500 text-cuerpass-600">
+            <Button 
+              variant="outline" 
+              className="text-lg px-8 py-3 border-2 border-cuerpass-500 text-cuerpass-600"
+              onClick={() => navigate('/empresas/planes')}
+            >
               Ver Planes
             </Button>
           </div>
@@ -216,7 +225,10 @@ const ForCompanies = () => {
                     ))}
                   </ul>
 
-                  <Button className={`w-full ${plan.popular ? 'btn-primary' : 'border-2 border-cuerpass-500 text-cuerpass-600 hover:bg-cuerpass-50'}`}>
+                  <Button 
+                    className={`w-full ${plan.popular ? 'btn-primary' : 'border-2 border-cuerpass-500 text-cuerpass-600 hover:bg-cuerpass-50'}`}
+                    onClick={() => navigate(plan.price === "Personalizado" ? '/empresas/contacto' : '/empresas/planes')}
+                  >
                     {plan.price === "Personalizado" ? "Contactar Ventas" : "Empezar Ahora"}
                   </Button>
                 </CardContent>
@@ -235,10 +247,17 @@ const ForCompanies = () => {
             Agenda una demo personalizada y descubre cómo Cuerpass puede beneficiar a tu organización.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-white text-cuerpass-600 hover:bg-gray-100 text-lg px-8 py-3">
+            <Button 
+              className="bg-white text-cuerpass-600 hover:bg-gray-100 text-lg px-8 py-3"
+              onClick={() => navigate('/empresas/contacto')}
+            >
               Solicitar Demo Gratis
             </Button>
-            <Button variant="outline" className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-3">
+            <Button 
+              variant="outline" 
+              className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-3"
+              onClick={() => navigate('/empresas/contacto')}
+            >
               Hablar con Ventas
             </Button>
           </div>

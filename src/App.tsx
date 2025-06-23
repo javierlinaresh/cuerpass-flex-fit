@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,6 +19,12 @@ import PartnerDashboard from "./pages/PartnerDashboard";
 import HowItWorks from "./pages/HowItWorks";
 import ForCompanies from "./pages/ForCompanies";
 import ForPartners from "./pages/ForPartners";
+import PartnerReports from "./pages/PartnerReports";
+import PartnerSchedule from "./pages/PartnerSchedule";
+import PartnerServices from "./pages/PartnerServices";
+import PartnerBookings from "./pages/PartnerBookings";
+import CorporatePlans from "./pages/CorporatePlans";
+import CorporateContact from "./pages/CorporateContact";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +50,12 @@ const App = () => (
             <Route path="/socios/registro" element={<PartnerRegister />} />
             <Route path="/socios/login" element={<PartnerLogin />} />
             <Route path="/socios/dashboard" element={<PartnerDashboard />} />
+            <Route path="/socios/reportes" element={<PartnerReports />} />
+            <Route path="/socios/horarios" element={<PartnerSchedule />} />
+            <Route path="/socios/servicios" element={<PartnerServices />} />
+            <Route path="/socios/reservas" element={<PartnerBookings />} />
+            <Route path="/empresas/planes" element={<CorporatePlans />} />
+            <Route path="/empresas/contacto" element={<CorporateContact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
