@@ -3,7 +3,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 
 const PartnerLogin = () => {
@@ -11,6 +13,10 @@ const PartnerLogin = () => {
     email: "",
     password: ""
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const { login } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -19,10 +25,28 @@ const PartnerLogin = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Partner login:", formData);
-    // TODO: Implement actual partner login logic
+    setIsLoading(true);
+
+    try {
+      const success = await login(formData.email, formData.password, 'partner');
+      if (success) {
+        toast({
+          title: "¡Bienvenido!",
+          description: "Has accedido al panel de socio.",
+        });
+        navigate('/socios/dashboard');
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Credenciales incorrectas. Inténtalo de nuevo.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -68,8 +92,8 @@ const PartnerLogin = () => {
                 />
               </div>
 
-              <Button type="submit" className="w-full btn-primary">
-                Acceder al Panel
+              <Button type="submit" className="w-full btn-primary" disabled={isLoading}>
+                {isLoading ? "Accediendo..." : "Acceder al Panel"}
               </Button>
             </form>
 

@@ -3,17 +3,41 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { login } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login attempt:", { email, password });
-    // TODO: Implement actual login logic
+    setIsLoading(true);
+
+    try {
+      const success = await login(email, password, 'user');
+      if (success) {
+        toast({
+          title: "¡Bienvenido!",
+          description: "Has iniciado sesión correctamente.",
+        });
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Credenciales incorrectas. Inténtalo de nuevo.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -57,8 +81,8 @@ const Login = () => {
                 />
               </div>
 
-              <Button type="submit" className="w-full btn-primary">
-                Iniciar Sesión
+              <Button type="submit" className="w-full btn-primary" disabled={isLoading}>
+                {isLoading ? "Iniciando..." : "Iniciar Sesión"}
               </Button>
             </form>
 

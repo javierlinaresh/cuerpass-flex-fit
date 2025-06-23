@@ -3,7 +3,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 
 const PartnerRegister = () => {
@@ -16,6 +18,10 @@ const PartnerRegister = () => {
     businessType: "",
     password: ""
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const { register } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData(prev => ({
@@ -24,10 +30,28 @@ const PartnerRegister = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Partner registration:", formData);
-    // TODO: Implement actual partner registration logic
+    setIsLoading(true);
+
+    try {
+      const success = await register(formData);
+      if (success) {
+        toast({
+          title: "¡Registro exitoso!",
+          description: "Tu negocio ha sido registrado. Pronto nos pondremos en contacto contigo.",
+        });
+        navigate('/socios/dashboard');
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Hubo un problema al registrar tu negocio. Inténtalo de nuevo.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -152,8 +176,8 @@ const PartnerRegister = () => {
                 />
               </div>
 
-              <Button type="submit" className="w-full btn-primary">
-                Registrar Negocio
+              <Button type="submit" className="w-full btn-primary" disabled={isLoading}>
+                {isLoading ? "Registrando..." : "Registrar Negocio"}
               </Button>
             </form>
 

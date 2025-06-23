@@ -1,201 +1,179 @@
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import Header from "@/components/Header";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const Dashboard = () => {
-  // Mock user data
-  const user = {
-    name: "María González",
-    credits: 12,
-    plan: "Plan Premium"
-  };
+  const { user, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
-  const upcomingReservations = [
-    {
-      id: 1,
-      centerName: "Gold's Gym Las Mercedes",
-      service: "Day Pass Completo",
-      date: "2024-01-20",
-      time: "10:00 AM",
-      credits: 3
-    },
-    {
-      id: 2,
-      centerName: "Club Pádel Altamira",
-      service: "Cancha Pádel (1hr)",
-      date: "2024-01-22",
-      time: "6:00 PM",
-      credits: 4
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login');
     }
-  ];
+  }, [isAuthenticated, navigate]);
 
-  const recentActivity = [
+  if (!user) return null;
+
+  const recentReservations = [
     {
       id: 1,
-      action: "Reserva confirmada",
-      center: "Zen Spa & Wellness",
+      center: "Gold's Gym Las Mercedes",
+      service: "Day Pass Completo",
       date: "2024-01-15",
-      credits: -4
+      time: "09:00",
+      credits: 3,
+      status: "confirmada"
     },
     {
       id: 2,
-      action: "Check-in completado",
-      center: "Gold's Gym Las Mercedes",
+      center: "Zen Spa Altamira",
+      service: "Masaje Relajante",
       date: "2024-01-12",
-      credits: 0
+      time: "14:30",
+      credits: 4,
+      status: "completada"
     }
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
       <Header />
-      
-      <div className="container max-w-6xl mx-auto px-4 py-12">
+      <div className="container max-w-7xl mx-auto px-4 py-12">
+        {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="font-display font-bold text-3xl text-gray-900 mb-2">
-            ¡Hola, {user.name}!
+            ¡Hola, {user.name}! 👋
           </h1>
           <p className="text-gray-600">
-            Gestiona tus reservas y créditos desde tu panel personal
+            Aquí puedes gestionar tus créditos, reservas y explorar nuevos centros
           </p>
         </div>
 
+        {/* Stats Cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          {/* Credits Card */}
-          <Card className="shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-lg">Tus Créditos</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-cuerpass-600 mb-2">
-                  {user.credits}
-                </div>
-                <p className="text-sm text-gray-600 mb-4">Créditos disponibles</p>
-                <Badge className="bg-cuerpass-100 text-cuerpass-700">
-                  {user.plan}
-                </Badge>
+          <Card className="border-0 shadow-lg">
+            <CardContent className="p-6 text-center">
+              <div className="text-3xl font-bold text-cuerpass-600 mb-2">
+                {user.credits}
               </div>
+              <p className="text-gray-600 text-sm">Créditos Disponibles</p>
             </CardContent>
           </Card>
-
-          {/* Quick Actions */}
-          <Card className="shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-lg">Acciones Rápidas</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <Link to="/servicios">
-                <Button className="w-full btn-primary">
-                  Explorar Servicios
-                </Button>
-              </Link>
-              <Link to="/profile">
-                <Button variant="outline" className="w-full">
-                  Mi Perfil
-                </Button>
-              </Link>
+          
+          <Card className="border-0 shadow-lg">
+            <CardContent className="p-6 text-center">
+              <div className="text-3xl font-bold text-green-600 mb-2">
+                2
+              </div>
+              <p className="text-gray-600 text-sm">Reservas Este Mes</p>
             </CardContent>
           </Card>
-
-          {/* Stats */}
-          <Card className="shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-lg">Este Mes</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Reservas:</span>
-                  <span className="font-medium">5</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Créditos usados:</span>
-                  <span className="font-medium">18</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Centros visitados:</span>
-                  <span className="font-medium">3</span>
-                </div>
+          
+          <Card className="border-0 shadow-lg">
+            <CardContent className="p-6 text-center">
+              <div className="text-3xl font-bold text-blue-600 mb-2">
+                15
               </div>
+              <p className="text-gray-600 text-sm">Centros Visitados</p>
             </CardContent>
           </Card>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {/* Upcoming Reservations */}
-          <Card className="shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-lg">Próximas Reservas</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {upcomingReservations.map(reservation => (
-                  <div key={reservation.id} className="border border-gray-200 rounded-lg p-4">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-medium text-gray-900">
-                        {reservation.centerName}
-                      </h4>
-                      <Badge className="bg-green-100 text-green-700 text-xs">
-                        Confirmada
-                      </Badge>
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Recent Reservations */}
+          <div className="lg:col-span-2">
+            <Card className="border-0 shadow-lg">
+              <CardHeader>
+                <CardTitle className="font-display text-xl">
+                  Reservas Recientes
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {recentReservations.map((reservation) => (
+                    <div key={reservation.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-gray-900">
+                          {reservation.center}
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                          {reservation.service}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          {reservation.date} a las {reservation.time}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <Badge className={`mb-2 ${
+                          reservation.status === 'confirmada' 
+                            ? 'bg-blue-100 text-blue-700' 
+                            : 'bg-green-100 text-green-700'
+                        }`}>
+                          {reservation.status}
+                        </Badge>
+                        <p className="text-sm text-gray-600">
+                          {reservation.credits} créditos
+                        </p>
+                      </div>
                     </div>
-                    <p className="text-sm text-gray-600 mb-2">
-                      {reservation.service}
-                    </p>
-                    <div className="flex justify-between items-center text-xs text-gray-500">
-                      <span>
-                        {reservation.date} a las {reservation.time}
-                      </span>
-                      <span>
-                        {reservation.credits} créditos
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
-          {/* Recent Activity */}
-          <Card className="shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-lg">Actividad Reciente</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {recentActivity.map(activity => (
-                  <div key={activity.id} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                    <div>
-                      <p className="text-sm font-medium text-gray-900">
-                        {activity.action}
-                      </p>
-                      <p className="text-xs text-gray-600">
-                        {activity.center}
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        {activity.date}
-                      </p>
-                    </div>
-                    {activity.credits !== 0 && (
-                      <Badge 
-                        className={`text-xs ${
-                          activity.credits > 0 
-                            ? 'bg-green-100 text-green-700' 
-                            : 'bg-red-100 text-red-700'
-                        }`}
-                      >
-                        {activity.credits > 0 ? '+' : ''}{activity.credits}
-                      </Badge>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          {/* Actions */}
+          <div className="space-y-6">
+            <Card className="border-0 shadow-lg">
+              <CardHeader>
+                <CardTitle className="font-display text-xl">
+                  Acciones Rápidas
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Button 
+                  className="w-full btn-primary"
+                  onClick={() => navigate('/servicios')}
+                >
+                  Explorar Centros
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full border-2 border-cuerpass-500 text-cuerpass-600"
+                  onClick={() => navigate('/profile')}
+                >
+                  Editar Perfil
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  className="w-full text-gray-600"
+                  onClick={() => navigate('/como-funciona')}
+                >
+                  ¿Cómo usar los créditos?
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Credit Status */}
+            <Card className="border-0 shadow-lg bg-gradient-to-r from-cuerpass-500 to-coral-500 text-white">
+              <CardContent className="p-6 text-center">
+                <h3 className="font-display font-semibold text-lg mb-2">
+                  Estado de Membresía
+                </h3>
+                <p className="text-sm opacity-90 mb-4">
+                  Plan Básico - Renovación automática
+                </p>
+                <Button className="bg-white text-cuerpass-600 hover:bg-gray-100 text-sm">
+                  Actualizar Plan
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

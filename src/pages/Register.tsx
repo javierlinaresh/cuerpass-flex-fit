@@ -3,7 +3,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 
 const Register = () => {
@@ -13,6 +15,10 @@ const Register = () => {
     password: "",
     confirmPassword: ""
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const { register } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -21,10 +27,38 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Register attempt:", formData);
-    // TODO: Implement actual registration logic
+    
+    if (formData.password !== formData.confirmPassword) {
+      toast({
+        title: "Error",
+        description: "Las contraseñas no coinciden.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const success = await register(formData);
+      if (success) {
+        toast({
+          title: "¡Registro exitoso!",
+          description: "Te hemos regalado 10 créditos de bienvenida.",
+        });
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Hubo un problema al crear tu cuenta. Inténtalo de nuevo.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -98,8 +132,8 @@ const Register = () => {
                 />
               </div>
 
-              <Button type="submit" className="w-full btn-primary">
-                Crear Cuenta
+              <Button type="submit" className="w-full btn-primary" disabled={isLoading}>
+                {isLoading ? "Creando cuenta..." : "Crear Cuenta"}
               </Button>
             </form>
 
