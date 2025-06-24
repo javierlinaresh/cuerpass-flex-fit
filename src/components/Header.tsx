@@ -1,22 +1,21 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { User, Search, LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, logout, isAuthenticated } = useAuth();
+  const {
+    user,
+    logout,
+    isAuthenticated
+  } = useAuth();
   const navigate = useNavigate();
-
   const handleLogout = () => {
     logout();
     navigate('/');
   };
-
-  return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-orange-100">
+  return <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-orange-100">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -36,7 +35,7 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <Link to="/servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
+            <Link to="/servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors px-[10px]">
               Servicios
             </Link>
             <Link to="/como-funciona" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
@@ -58,8 +57,7 @@ const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-3">
-            {isAuthenticated ? (
-              <>
+            {isAuthenticated ? <>
                 <Button variant="ghost" size="sm" className="text-gray-600">
                   <Search className="w-4 h-4 mr-2" />
                   Buscar
@@ -73,9 +71,7 @@ const Header = () => {
                 <Button variant="ghost" size="sm" onClick={handleLogout} className="text-gray-600">
                   <LogOut className="w-4 h-4" />
                 </Button>
-              </>
-            ) : (
-              <>
+              </> : <>
                 <Link to="/login">
                   <Button variant="ghost" size="sm" className="text-gray-600">
                     Iniciar Sesión
@@ -86,15 +82,11 @@ const Header = () => {
                     Registrarse
                   </Button>
                 </Link>
-              </>
-            )}
+              </>}
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
+          <button className="md:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <div className="w-6 h-6 flex flex-col justify-center space-y-1">
               <span className={`h-0.5 bg-gray-600 transition-all ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`} />
               <span className={`h-0.5 bg-gray-600 transition-all ${isMenuOpen ? 'opacity-0' : ''}`} />
@@ -104,8 +96,7 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-orange-100">
+        {isMenuOpen && <div className="md:hidden py-4 border-t border-orange-100">
             <nav className="flex flex-col space-y-3">
               <Link to="/servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
                 Servicios
@@ -126,8 +117,7 @@ const Header = () => {
                 Contacto
               </Link>
               
-              {isAuthenticated ? (
-                <div className="flex flex-col space-y-2 pt-4">
+              {isAuthenticated ? <div className="flex flex-col space-y-2 pt-4">
                   <Link to={user?.type === 'partner' ? '/socios/dashboard' : '/dashboard'}>
                     <Button variant="ghost" className="justify-start w-full">
                       <User className="w-4 h-4 mr-2" />
@@ -138,9 +128,7 @@ const Header = () => {
                     <LogOut className="w-4 h-4 mr-2" />
                     Salir
                   </Button>
-                </div>
-              ) : (
-                <div className="flex flex-col space-y-2 pt-4">
+                </div> : <div className="flex flex-col space-y-2 pt-4">
                   <Link to="/login">
                     <Button variant="ghost" className="justify-start w-full">
                       Iniciar Sesión
@@ -151,14 +139,10 @@ const Header = () => {
                       Registrarse
                     </Button>
                   </Link>
-                </div>
-              )}
+                </div>}
             </nav>
-          </div>
-        )}
+          </div>}
       </div>
-    </header>
-  );
+    </header>;
 };
-
 export default Header;
