@@ -6,6 +6,11 @@ interface CenterGalleryProps {
 }
 
 const CenterGallery = ({ center }: CenterGalleryProps) => {
+  // Don't render the gallery component if there's no gallery data
+  if (!center.gallery || center.gallery.length === 0) {
+    return null;
+  }
+
   return (
     <Card className="border-0 shadow-lg">
       <CardContent className="p-6">

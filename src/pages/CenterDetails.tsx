@@ -1,5 +1,6 @@
+
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
@@ -36,58 +37,6 @@ const centersData: Record<string, any> = {
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
       "https://images.unsplash.com/photo-1583500178690-f7320ed5ea28?w=400&h=300&fit=crop"
     ]
-  },
-  "2": {
-    id: "2",
-    name: "Club Pádel Altamira",
-    type: "Deportes",
-    category: "deportes",
-    rating: 4.9,
-    reviews: 178,
-    image: "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=800&h=400&fit=crop",
-    location: "Av. San Juan Bosco, Altamira, Caracas",
-    phone: "+58 212 267-8901",
-    hours: "Lunes a Domingo: 7:00 AM - 10:00 PM",
-    description: "Club deportivo especializado en pádel con canchas profesionales y coaches certificados.",
-    services: [
-      { name: "Cancha Pádel (1hr)", credits: 4, description: "Reserva de cancha por 1 hora", coach: "Pedro Ramírez" },
-      { name: "Clase de Pádel", credits: 3, description: "Clase grupal con instructor", coach: "Ana Martínez" },
-      { name: "Alquiler Raquetas", credits: 1, description: "Alquiler de raquetas profesionales" },
-      { name: "Torneo Amateur", credits: 5, description: "Participación en torneo semanal", coach: "Carlos Torres" }
-    ],
-    features: ["Iluminación LED", "Césped Sintético", "Cafetería", "Vestuarios"],
-    amenities: ["🎾 4 Canchas de Pádel", "🚿 Vestuarios", "☕ Cafetería", "🏆 Zona de Trofeos", "🅿️ Estacionamiento"],
-    gallery: [
-      "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
-    ]
-  },
-  "3": {
-    id: "3",
-    name: "Zen Spa & Wellness",
-    type: "Spa",
-    category: "spa",
-    rating: 4.9,
-    reviews: 189,
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=400&fit=crop",
-    location: "C.C. Los Palos Grandes, Caracas",
-    phone: "+58 212 285-3456",
-    hours: "Lunes a Sábado: 9:00 AM - 8:00 PM\nDomingo: 10:00 AM - 6:00 PM",
-    description: "Spa de lujo especializado en tratamientos de relajación y bienestar con terapeutas certificados.",
-    services: [
-      { name: "Masaje Relajante", credits: 4, description: "Masaje de cuerpo completo (60 min)", therapist: "Laura González" },
-      { name: "Facial Hidratante", credits: 3, description: "Tratamiento facial profundo", therapist: "Carmen Ruiz" },
-      { name: "Manicure & Pedicure", credits: 2, description: "Cuidado completo de manos y pies", therapist: "Sofía Morales" },
-      { name: "Aromaterapia", credits: 5, description: "Sesión de aromaterapia (90 min)", therapist: "María Fernández" }
-    ],
-    features: ["Ambiente Relajante", "Productos Naturales", "Terapeutas Certificados", "Música Ambiental"],
-    amenities: ["🛁 Jacuzzi", "🧘‍♀️ Sala de Meditación", "🌿 Jardín Zen", "🎵 Musicoterapia", "☕ Té de Cortesía"],
-    gallery: [
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=400&h=300&fit=crop"
-    ]
   }
 };
 
@@ -98,9 +47,28 @@ const CenterDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [center, setCenter] = useState<any>(null);
 
-  // Obtener los datos del centro, ya sea del state o de los datos mock
-  const center = location.state?.business || centersData[id || "1"] || centersData["1"];
+  useEffect(() => {
+    console.log('CenterDetails - Location state:', location.state);
+    console.log('CenterDetails - URL ID:', id);
+    
+    // Get center data from state or fallback to mock data
+    let centerData = location.state?.business;
+    
+    if (!centerData && id) {
+      // Try to find in mock data
+      centerData = centersData[id];
+    }
+    
+    if (!centerData) {
+      // Fallback to first center if nothing found
+      centerData = centersData["1"];
+    }
+
+    console.log('CenterDetails - Final center data:', centerData);
+    setCenter(centerData);
+  }, [id, location.state]);
 
   const handleReservation = (service: any) => {
     if (!isAuthenticated) {
@@ -130,6 +98,22 @@ const CenterDetails = () => {
 
     setSelectedService(null);
   };
+
+  // Show loading or error state if no center data
+  if (!center) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
+        <Header />
+        <div className="container max-w-7xl mx-auto px-4 py-12">
+          <div className="text-center">
+            <h1 className="font-display font-bold text-2xl text-gray-900 mb-4">
+              Cargando centro...
+            </h1>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
