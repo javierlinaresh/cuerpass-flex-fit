@@ -3,9 +3,11 @@ import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import CenterHero from "@/components/center/CenterHero";
+import CenterServices from "@/components/center/CenterServices";
+import CenterDescription from "@/components/center/CenterDescription";
+import CenterGallery from "@/components/center/CenterGallery";
+import CenterSidebar from "@/components/center/CenterSidebar";
 
 // Mock data - en producción vendría de una API
 const centersData: Record<string, any> = {
@@ -133,190 +135,22 @@ const CenterDetails = () => {
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
       <Header />
       <div className="container max-w-7xl mx-auto px-4 py-12">
-        {/* Hero Section */}
-        <div className="mb-8">
-          <img 
-            src={center.image} 
-            alt={center.name}
-            className="w-full h-64 md:h-80 object-cover rounded-2xl shadow-lg mb-6"
-          />
-          
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <Badge className="bg-cuerpass-100 text-cuerpass-700">
-                  {center.type}
-                </Badge>
-                <div className="flex items-center text-sm text-gray-600">
-                  ⭐ {center.rating} ({center.reviews} reseñas)
-                </div>
-              </div>
-              <h1 className="font-display font-bold text-3xl text-gray-900 mb-2">
-                {center.name}
-              </h1>
-              <p className="text-gray-600 flex items-center">
-                📍 {center.location}
-              </p>
-            </div>
-            
-            <div className="flex gap-3">
-              <Button variant="outline" className="border-2 border-cuerpass-500 text-cuerpass-600">
-                📞 Llamar
-              </Button>
-              <Button variant="outline" className="border-2 border-cuerpass-500 text-cuerpass-600">
-                🗺️ Cómo Llegar
-              </Button>
-            </div>
-          </div>
-        </div>
-
+        <CenterHero center={center} />
+        
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Services */}
-            <Card className="border-0 shadow-lg">
-              <CardContent className="p-6">
-                <h2 className="font-display font-bold text-2xl text-gray-900 mb-6">
-                  Servicios Disponibles
-                </h2>
-                <div className="space-y-4">
-                  {center.services.map((service, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-gray-900 mb-1">
-                          {service.name}
-                        </h3>
-                        <p className="text-sm text-gray-600 mb-1">
-                          {service.description}
-                        </p>
-                        {(service.instructor || service.barber || service.therapist || service.coach || service.stylist || service.esthetician) && (
-                          <p className="text-xs text-cuerpass-600">
-                            {service.instructor && `Instructor: ${service.instructor}`}
-                            {service.barber && `Barbero: ${service.barber}`}
-                            {service.therapist && `Terapeuta: ${service.therapist}`}
-                            {service.coach && `Coach: ${service.coach}`}
-                            {service.stylist && `Estilista: ${service.stylist}`}
-                            {service.esthetician && `Esteticista: ${service.esthetician}`}
-                          </p>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Badge className="bg-cuerpass-100 text-cuerpass-700">
-                          {service.credits} créditos
-                        </Badge>
-                        <Button 
-                          className="btn-primary"
-                          onClick={() => handleReservation(service)}
-                        >
-                          Reservar
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Description */}
-            <Card className="border-0 shadow-lg">
-              <CardContent className="p-6">
-                <h2 className="font-display font-bold text-2xl text-gray-900 mb-4">
-                  Sobre Este Centro
-                </h2>
-                <p className="text-gray-700 leading-relaxed mb-6">
-                  {center.description}
-                </p>
-                
-                <h3 className="font-semibold text-lg text-gray-900 mb-4">
-                  Instalaciones Disponibles
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {center.amenities.map((amenity, index) => (
-                    <div key={index} className="bg-gray-50 rounded-lg p-3 text-sm text-center">
-                      {amenity}
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Gallery */}
-            <Card className="border-0 shadow-lg">
-              <CardContent className="p-6">
-                <h2 className="font-display font-bold text-2xl text-gray-900 mb-4">
-                  Galería
-                </h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {center.gallery.map((image, index) => (
-                    <img 
-                      key={index}
-                      src={image} 
-                      alt={`${center.name} ${index + 1}`}
-                      className="w-full h-32 object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer"
-                    />
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <CenterServices center={center} onReservation={handleReservation} />
+            <CenterDescription center={center} />
+            <CenterGallery center={center} />
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Info Card */}
-            <Card className="border-0 shadow-lg">
-              <CardContent className="p-6">
-                <h3 className="font-display font-semibold text-lg text-gray-900 mb-4">
-                  Información
-                </h3>
-                <div className="space-y-3 text-sm">
-                  <div>
-                    <p className="font-medium text-gray-900">📞 Teléfono</p>
-                    <p className="text-gray-600">{center.phone}</p>
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">🕒 Horarios</p>
-                    <p className="text-gray-600 whitespace-pre-line">{center.hours}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Features */}
-            <Card className="border-0 shadow-lg">
-              <CardContent className="p-6">
-                <h3 className="font-display font-semibold text-lg text-gray-900 mb-4">
-                  Características
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {center.features.map((feature, index) => (
-                    <Badge key={index} variant="secondary" className="text-xs">
-                      {feature}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* User Credits */}
-            {isAuthenticated && user && (
-              <Card className="border-0 shadow-lg bg-gradient-to-r from-cuerpass-500 to-coral-500 text-white">
-                <CardContent className="p-6 text-center">
-                  <h3 className="font-display font-semibold text-lg mb-2">
-                    Tus Créditos
-                  </h3>
-                  <div className="text-3xl font-bold mb-2">
-                    {user.credits}
-                  </div>
-                  <p className="text-sm opacity-90 mb-4">
-                    Créditos disponibles
-                  </p>
-                  <Button className="bg-white text-cuerpass-600 hover:bg-gray-100 text-sm w-full">
-                    Comprar Más Créditos
-                  </Button>
-                </CardContent>
-              </Card>
-            )}
-          </div>
+          <CenterSidebar 
+            center={center} 
+            user={user} 
+            isAuthenticated={isAuthenticated} 
+          />
         </div>
       </div>
     </div>

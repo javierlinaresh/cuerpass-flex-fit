@@ -1,0 +1,34 @@
+
+import { Card, CardContent } from "@/components/ui/card";
+
+interface CenterDescriptionProps {
+  center: any;
+}
+
+const CenterDescription = ({ center }: CenterDescriptionProps) => {
+  return (
+    <Card className="border-0 shadow-lg">
+      <CardContent className="p-6">
+        <h2 className="font-display font-bold text-2xl text-gray-900 mb-4">
+          Sobre Este Centro
+        </h2>
+        <p className="text-gray-700 leading-relaxed mb-6">
+          {center.description}
+        </p>
+        
+        <h3 className="font-semibold text-lg text-gray-900 mb-4">
+          Instalaciones Disponibles
+        </h3>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          {center.amenities.map((amenity: string, index: number) => (
+            <div key={index} className="bg-gray-50 rounded-lg p-3 text-sm text-center">
+              {amenity}
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default CenterDescription;
