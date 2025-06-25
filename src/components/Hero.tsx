@@ -1,7 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -27,12 +27,16 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <Button size="lg" className="btn-primary text-lg px-8 py-4">
-                Explorar Servicios
-              </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-2 border-cuerpass-200 text-cuerpass-700 hover:bg-cuerpass-50">
-                Ver Precios
-              </Button>
+              <Link to="/servicios">
+                <Button size="lg" className="btn-primary text-lg px-8 py-4 w-full sm:w-auto">
+                  Explorar Servicios
+                </Button>
+              </Link>
+              <Link to="/checkout">
+                <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-2 border-cuerpass-200 text-cuerpass-700 hover:bg-cuerpass-50 w-full sm:w-auto">
+                  Ver Precios
+                </Button>
+              </Link>
             </div>
 
             {/* Social Proof */}

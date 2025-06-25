@@ -1,4 +1,3 @@
-
 import Header from "@/components/Header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -8,28 +7,28 @@ import { Link } from "react-router-dom";
 const ForPartners = () => {
   const benefits = [
     {
-      title: "Más Clientes, Cero Inversión",
-      description: "Conecta con una base de usuarios activos sin gastos de marketing o publicidad",
+      title: "Más Clientes, Sin Gastos",
+      description: "Conecta con una base de usuarios activos. Nosotros manejamos todo el marketing y la adquisición de clientes",
       icon: "📈",
       stats: "2-3x más visitas promedio"
     },
     {
-      title: "Ingresos Predecibles",
-      description: "Recibe pagos garantizados por cada reserva confirmada a través de nuestra plataforma",
+      title: "Pagos Garantizados",
+      description: "Recibe el pago completo del servicio. Nosotros descontamos nuestra comisión automáticamente",
       icon: "💰",
       stats: "Pagos cada 15 días"
     },
     {
       title: "Gestión Simplificada",
-      description: "Panel administrativo completo para manejar reservas, horarios y estadísticas",
+      description: "Panel administrativo completo para manejar reservas, horarios y estadísticas de tus servicios",
       icon: "📊",
       stats: "Todo en un solo lugar"
     },
     {
-      title: "Cero Riesgo",
-      description: "Sin costos de entrada, sin comisiones ocultas. Solo paga por los clientes que realmente recibas",
+      title: "Sin Costos de Entrada",
+      description: "Únete gratis a nuestra plataforma. Solo nos llevamos una pequeña comisión de cada servicio vendido",
       icon: "🛡️",
-      stats: "Modelo de éxito compartido"
+      stats: "Registro 100% gratuito"
     }
   ];
 
@@ -37,25 +36,25 @@ const ForPartners = () => {
     {
       step: "1",
       title: "Regístrate Gratis",
-      description: "Completa tu perfil de negocio y configura tus servicios disponibles",
+      description: "Completa tu perfil de negocio, configura tus servicios y horarios disponibles",
       time: "5 minutos"
     },
     {
       step: "2",
       title: "Verificación Express",
-      description: "Nuestro equipo verifica tu negocio y te da acceso al panel de gestión",
+      description: "Nuestro equipo verifica tu negocio y te da acceso al panel de gestión de reservas",
       time: "24-48 horas"
     },
     {
       step: "3",
-      title: "Comienza a Recibir Clientes",
-      description: "Los usuarios pueden reservar tus servicios y tú recibes notificaciones instantáneas",
+      title: "Recibe Reservas",
+      description: "Los usuarios reservan tus servicios y tú recibes notificaciones instantáneas",
       time: "Inmediato"
     },
     {
       step: "4",
       title: "Cobra Automáticamente",
-      description: "Recibe pagos directos cada quincena por todos los servicios prestados",
+      description: "Recibe el valor completo del servicio menos nuestra comisión. Transferencias automáticas cada quincena",
       time: "Cada 15 días"
     }
   ];
@@ -79,14 +78,14 @@ const ForPartners = () => {
 
   const pricing = {
     commission: "15%",
-    description: "Solo pagas cuando recibes clientes",
+    description: "Solo descontamos nuestra comisión de los servicios que vendas",
     features: [
       "Registro y verificación gratuitos",
       "Panel de gestión incluido",
       "Soporte técnico 24/7",
       "Marketing digital incluido",
-      "Pagos automáticos cada 15 días",
-      "Sin costos ocultos"
+      "Transferencias automáticas cada 15 días",
+      "Sin costos ocultos ni mensualidades"
     ]
   };
 
@@ -101,12 +100,12 @@ const ForPartners = () => {
             Para Socios Comerciales
           </Badge>
           <h1 className="font-display font-bold text-4xl md:text-5xl text-gray-900 mb-6">
-            Haz Crecer tu Negocio
+            Aumenta tus Ventas
             <span className="text-gradient"> Sin Invertir</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Únete a la red de bienestar más activa de Caracas. Nuestros socios aumentan sus visitas 
-            entre 2x y 3x sin gastar en marketing o publicidad.
+            Únete a la red de bienestar más activa de Caracas. Como Wellhub, Gympass o Totalpass, 
+            conectamos tu negocio con usuarios que ya están listos para comprar tus servicios.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/socios/registro">
@@ -173,6 +172,38 @@ const ForPartners = () => {
           </div>
         </div>
 
+        {/* Business Model Explanation */}
+        <div className="mb-20">
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8">
+            <h2 className="font-display font-bold text-3xl text-center text-gray-900 mb-8">
+              Nuestro Modelo de Negocio
+            </h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+                  👥
+                </div>
+                <h3 className="font-semibold text-lg mb-2">Para los Usuarios</h3>
+                <p className="text-gray-600 text-sm">Compran créditos para usar en diferentes centros. Flexibilidad total sin mensualidades.</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+                  🏢
+                </div>
+                <h3 className="font-semibold text-lg mb-2">Para ti (Socio)</h3>
+                <p className="text-gray-600 text-sm">Recibes clientes nuevos y el pago completo. Nosotros descontamos solo nuestra comisión del 15%.</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+                  💼
+                </div>
+                <h3 className="font-semibold text-lg mb-2">Para Cuerpass</h3>
+                <p className="text-gray-600 text-sm">Ganamos una comisión del 15% solo cuando vendes servicios. Si no vendes, no cobramos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Testimonials */}
         <div className="mb-20">
           <h2 className="font-display font-bold text-3xl text-center text-gray-900 mb-12">
@@ -210,10 +241,10 @@ const ForPartners = () => {
         <div className="mb-16">
           <div className="text-center mb-12">
             <h2 className="font-display font-bold text-3xl text-gray-900 mb-4">
-              Modelo de Éxito Compartido
+              Comisión Simple y Transparente
             </h2>
             <p className="text-xl text-gray-600">
-              Solo pagas cuando realmente recibes clientes a través de nuestra plataforma
+              Solo descontamos nuestra comisión cuando realmente vendes servicios
             </p>
           </div>
 
@@ -224,6 +255,9 @@ const ForPartners = () => {
                   {pricing.commission}
                 </div>
                 <p className="text-gray-600 text-lg">{pricing.description}</p>
+                <p className="text-sm text-gray-500 mt-2">
+                  Ejemplo: Si vendes un servicio de $20, recibes $17 y nosotros $3
+                </p>
               </div>
 
               <div className="bg-gray-50 rounded-xl p-6 mb-8">

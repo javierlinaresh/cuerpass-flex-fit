@@ -236,6 +236,30 @@ const Services = () => {
           </p>
         </div>
 
+        {/* Ofertas del Día */}
+        <div className="mb-8">
+          <div className="bg-gradient-to-r from-orange-400 to-red-500 rounded-2xl p-6 text-white mb-6">
+            <h2 className="font-display font-bold text-2xl mb-4">🔥 Ofertas del Día</h2>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div className="bg-white/20 rounded-lg p-4">
+                <h3 className="font-semibold mb-2">Gold's Gym - Day Pass</h3>
+                <p className="text-sm mb-2">Solo por hoy: <span className="line-through">3 créditos</span> <span className="font-bold">2 créditos</span></p>
+                <Badge className="bg-yellow-400 text-yellow-900">33% OFF</Badge>
+              </div>
+              <div className="bg-white/20 rounded-lg p-4">
+                <h3 className="font-semibold mb-2">Zen Spa - Masaje Relajante</h3>
+                <p className="text-sm mb-2">Oferta especial: <span className="line-through">4 créditos</span> <span className="font-bold">3 créditos</span></p>
+                <Badge className="bg-yellow-400 text-yellow-900">25% OFF</Badge>
+              </div>
+              <div className="bg-white/20 rounded-lg p-4">
+                <h3 className="font-semibold mb-2">Club Pádel - Cancha + Raquetas</h3>
+                <p className="text-sm mb-2">Pack combo: <span className="line-through">5 créditos</span> <span className="font-bold">4 créditos</span></p>
+                <Badge className="bg-yellow-400 text-yellow-900">20% OFF</Badge>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Search and Filters */}
         <div className="mb-8">
           <div className="relative max-w-md mx-auto mb-6">
@@ -333,7 +357,7 @@ const Services = () => {
                   ))}
                 </div>
 
-                <Link to={`/centro/${business.id}`}>
+                <Link to={`/centro/${business.id}`} state={{ business }}>
                   <Button className="w-full btn-primary text-sm">
                     Ver Detalles y Reservar
                   </Button>
