@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -9,8 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 // Mock data - en producción vendría de una API
-const centersData = {
-  1: {
+const centersData: Record<string, any> = {
+  "1": {
     id: "1",
     name: "Gold's Gym Las Mercedes",
     type: "Gimnasio",
@@ -36,7 +35,7 @@ const centersData = {
       "https://images.unsplash.com/photo-1583500178690-f7320ed5ea28?w=400&h=300&fit=crop"
     ]
   },
-  2: {
+  "2": {
     id: "2",
     name: "Club Pádel Altamira",
     type: "Deportes",
@@ -62,7 +61,7 @@ const centersData = {
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
     ]
   },
-  3: {
+  "3": {
     id: "3",
     name: "Zen Spa & Wellness",
     type: "Spa",
@@ -99,7 +98,7 @@ const CenterDetails = () => {
   const [selectedService, setSelectedService] = useState<string | null>(null);
 
   // Obtener los datos del centro, ya sea del state o de los datos mock
-  const center = location.state?.business || centersData[id as keyof typeof centersData] || centersData[1];
+  const center = location.state?.business || centersData[id || "1"] || centersData["1"];
 
   const handleReservation = (service: any) => {
     if (!isAuthenticated) {
