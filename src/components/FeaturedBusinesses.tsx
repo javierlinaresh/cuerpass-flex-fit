@@ -2,6 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const businesses = [
   {
@@ -17,10 +18,27 @@ const businesses = [
       { name: "Solo Cardio", credits: 2 },
       { name: "Clases Grupales", credits: 2 }
     ],
-    features: ["WiFi Gratis", "Estacionamiento", "Vestuarios Premium"]
+    features: ["WiFi Gratis", "Estacionamiento", "Vestuarios Premium"],
+    category: "gimnasios"
   },
   {
     id: 2,
+    name: "Yoga Studio Altamira",
+    type: "Yoga & Pilates",
+    rating: 4.9,
+    reviews: 156,
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&h=300&fit=crop",
+    location: "Altamira",
+    services: [
+      { name: "Clase de Yoga", credits: 2, instructor: "María Fernández" },
+      { name: "Pilates Reformer", credits: 3, instructor: "Carlos Mendoza" },
+      { name: "Meditación Guiada", credits: 1, instructor: "Ana Rodríguez" }
+    ],
+    features: ["Ambiente Zen", "Instructores Certificados", "Equipos Premium"],
+    category: "yoga-pilates"
+  },
+  {
+    id: 3,
     name: "Club Pádel Altamira",
     type: "Deportes",
     rating: 4.9,
@@ -32,10 +50,43 @@ const businesses = [
       { name: "Cancha Pádel (1hr)", credits: 5, note: "Horario pico" },
       { name: "Alquiler Raquetas", credits: 1 }
     ],
-    features: ["Iluminación LED", "Césped Sintético", "Cafetería"]
+    features: ["Iluminación LED", "Césped Sintético", "Cafetería"],
+    category: "deportes"
   },
   {
-    id: 3,
+    id: 4,
+    name: "Barbería Clásica",
+    type: "Barbería",
+    rating: 4.8,
+    reviews: 123,
+    image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&h=300&fit=crop",
+    location: "Chacao",
+    services: [
+      { name: "Corte + Lavado", credits: 2, barber: "Miguel Pérez" },
+      { name: "Afeitado Clásico", credits: 2, barber: "Roberto Silva" },
+      { name: "Corte + Barba", credits: 3, barber: "José Martínez" }
+    ],
+    features: ["Ambiente Clásico", "Barberos Expertos", "Productos Premium"],
+    category: "barberias"
+  },
+  {
+    id: 5,
+    name: "Zen Spa & Wellness",
+    type: "Spa",
+    rating: 4.9,
+    reviews: 189,
+    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=500&h=300&fit=crop",
+    location: "Los Palos Grandes",
+    services: [
+      { name: "Masaje Relajante", credits: 4, therapist: "Laura González" },
+      { name: "Facial Hidratante", credits: 3, therapist: "Carmen Ruiz" },
+      { name: "Manicure & Pedicure", credits: 2, therapist: "Sofía Morales" }
+    ],
+    features: ["Ambiente Relajante", "Productos Naturales", "Terapeutas Certificados"],
+    category: "spa"
+  },
+  {
+    id: 6,
     name: "Centro Deportivo La Lagunita",
     type: "Deportes",
     rating: 4.7,
@@ -45,28 +96,20 @@ const businesses = [
     services: [
       { name: "Fútbol 5 (90min)", credits: 6, note: "Hasta 10 jugadores" },
       { name: "Fútbol 7 (90min)", credits: 8, note: "Hasta 14 jugadores" },
-      { name: "Cancha Tenis (1hr)", credits: 3 }
+      { name: "Cancha Tenis (1hr)", credits: 3, instructor: "Pedro Ramírez" }
     ],
-    features: ["Estacionamiento Amplio", "Vestuarios", "Hidratación"]
-  },
-  {
-    id: 4,
-    name: "Zen Spa & Wellness",
-    type: "Spa",
-    rating: 4.9,
-    reviews: 189,
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=500&h=300&fit=crop",
-    location: "Los Palos Grandes",
-    services: [
-      { name: "Masaje Relajante", credits: 4 },
-      { name: "Facial Hidratante", credits: 3 },
-      { name: "Manicure & Pedicure", credits: 2 }
-    ],
-    features: ["Ambiente Relajante", "Productos Naturales", "Terapeutas Certificados"]
+    features: ["Estacionamiento Amplio", "Vestuarios", "Hidratación"],
+    category: "deportes"
   }
 ];
 
 const FeaturedBusinesses = () => {
+  const navigate = useNavigate();
+
+  const handleBusinessClick = (business: any) => {
+    navigate(`/centro/${business.id}`, { state: { business } });
+  };
+
   return (
     <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="container max-w-7xl mx-auto px-4">
@@ -75,16 +118,17 @@ const FeaturedBusinesses = () => {
             Centros Destacados
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Descubre algunos de nuestros socios más populares: desde gimnasios hasta canchas deportivas y spas de lujo.
+            Descubre algunos de nuestros socios más populares: desde gimnasios hasta canchas deportivas, spas de lujo y barberías especializadas.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-6">
-          {businesses.map((business, index) => (
+          {businesses.slice(0, 4).map((business, index) => (
             <Card 
               key={business.id} 
-              className={`card-hover border-0 shadow-lg overflow-hidden animate-slide-up`}
+              className={`card-hover cursor-pointer border-0 shadow-lg overflow-hidden animate-slide-up`}
               style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={() => handleBusinessClick(business)}
             >
               <div className="relative">
                 <img 
@@ -122,6 +166,13 @@ const FeaturedBusinesses = () => {
                         {service.note && (
                           <span className="text-gray-500 text-xs">{service.note}</span>
                         )}
+                        {(service.instructor || service.barber || service.therapist) && (
+                          <span className="text-cuerpass-600 text-xs">
+                            {service.instructor && `Instructor: ${service.instructor}`}
+                            {service.barber && `Barbero: ${service.barber}`}
+                            {service.therapist && `Terapeuta: ${service.therapist}`}
+                          </span>
+                        )}
                       </div>
                       <Badge className="bg-cuerpass-100 text-cuerpass-700 text-xs ml-2">
                         {service.credits} créditos
@@ -147,7 +198,12 @@ const FeaturedBusinesses = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg" className="border-2 border-cuerpass-200 text-cuerpass-700 hover:bg-cuerpass-50">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="border-2 border-cuerpass-200 text-cuerpass-700 hover:bg-cuerpass-50"
+            onClick={() => navigate('/servicios')}
+          >
             Ver Todos Los Centros
           </Button>
         </div>

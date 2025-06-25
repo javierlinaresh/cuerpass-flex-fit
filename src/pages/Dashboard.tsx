@@ -168,7 +168,10 @@ const Dashboard = () => {
                 <p className="text-sm opacity-90 mb-4">
                   Plan Básico - Renovación automática
                 </p>
-                <Button className="bg-white text-cuerpass-600 hover:bg-gray-100 text-sm">
+                <Button 
+                  className="bg-white text-cuerpass-600 hover:bg-gray-100 text-sm"
+                  onClick={() => navigate('/actualizar-plan')}
+                >
                   Actualizar Plan
                 </Button>
               </CardContent>

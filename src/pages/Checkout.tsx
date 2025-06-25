@@ -11,6 +11,13 @@ import { CreditCard, Smartphone, Building, DollarSign } from "lucide-react";
 
 const paymentMethods = [
   {
+    id: "tarjeta",
+    name: "Tarjeta Débito/Crédito",
+    icon: CreditCard,
+    description: "Visa, Mastercard, American Express",
+    fees: "Comisión bancaria aplicable"
+  },
+  {
     id: "pago-movil",
     name: "Pago Móvil",
     icon: Smartphone,
@@ -51,6 +58,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const planId = searchParams.get('plan') || 'flexible';
+  const isUpgrade = searchParams.get('upgrade') === 'true';
   const plan = plans[planId as keyof typeof plans] || plans.flexible;
   
   const [selectedMethod, setSelectedMethod] = useState('');
@@ -58,7 +66,11 @@ const Checkout = () => {
     name: '',
     email: '',
     phone: '',
-    reference: ''
+    reference: '',
+    cardNumber: '',
+    expiryDate: '',
+    cvv: '',
+    cardName: ''
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,11 +91,13 @@ const Checkout = () => {
       return;
     }
 
-    console.log('Payment processing:', { plan, method: selectedMethod, formData });
+    console.log('Payment processing:', { plan, method: selectedMethod, formData, isUpgrade });
     
     toast({
       title: "¡Pago Procesado!",
-      description: "Te hemos enviado los detalles por email. Tu cuenta será activada en 24 horas.",
+      description: isUpgrade 
+        ? "Tu plan ha sido actualizado exitosamente." 
+        : "Te hemos enviado los detalles por email. Tu cuenta será activada en 24 horas.",
     });
 
     setTimeout(() => {
@@ -98,10 +112,10 @@ const Checkout = () => {
       <div className="container max-w-4xl mx-auto px-4 py-12">
         <div className="mb-8">
           <h1 className="font-display font-bold text-3xl text-gray-900 mb-2">
-            Finalizar Suscripción
+            {isUpgrade ? 'Actualizar Plan' : 'Finalizar Suscripción'}
           </h1>
           <p className="text-gray-600">
-            Completa tu pago y comienza a disfrutar de Cuerpass
+            {isUpgrade ? 'Confirma la actualización de tu plan' : 'Completa tu pago y comienza a disfrutar de Cuerpass'}
           </p>
         </div>
 
@@ -110,7 +124,9 @@ const Checkout = () => {
           <div className="lg:col-span-1">
             <Card className="shadow-lg sticky top-24">
               <CardHeader>
-                <CardTitle className="text-lg">Resumen del Plan</CardTitle>
+                <CardTitle className="text-lg">
+                  {isUpgrade ? 'Nuevo Plan' : 'Resumen del Plan'}
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center mb-6">
@@ -221,20 +237,81 @@ const Checkout = () => {
                       />
                     </div>
                     
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Referencia de Pago
-                      </label>
-                      <Input
-                        name="reference"
-                        value={formData.reference}
-                        onChange={handleChange}
-                        placeholder="Número de referencia (opcional)"
-                      />
-                    </div>
+                    {selectedMethod !== 'tarjeta' && (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Referencia de Pago
+                        </label>
+                        <Input
+                          name="reference"
+                          value={formData.reference}
+                          onChange={handleChange}
+                          placeholder="Número de referencia (opcional)"
+                        />
+                      </div>
+                    )}
                   </div>
 
-                  {selectedMethod && (
+                  {selectedMethod === 'tarjeta' && (
+                    <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
+                      <h4 className="font-semibold text-gray-900">Datos de la Tarjeta</h4>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="md:col-span-2">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Número de Tarjeta *
+                          </label>
+                          <Input
+                            name="cardNumber"
+                            value={formData.cardNumber}
+                            onChange={handleChange}
+                            placeholder="1234 5678 9012 3456"
+                            maxLength={19}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Fecha de Vencimiento *
+                          </label>
+                          <Input
+                            name="expiryDate"
+                            value={formData.expiryDate}
+                            onChange={handleChange}
+                            placeholder="MM/AA"
+                            maxLength={5}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            CVV *
+                          </label>
+                          <Input
+                            name="cvv"
+                            value={formData.cvv}
+                            onChange={handleChange}
+                            placeholder="123"
+                            maxLength={4}
+                            required
+                          />
+                        </div>
+                        <div className="md:col-span-2">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Nombre en la Tarjeta *
+                          </label>
+                          <Input
+                            name="cardName"
+                            value={formData.cardName}
+                            onChange={handleChange}
+                            placeholder="María González"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedMethod && selectedMethod !== 'tarjeta' && (
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                       <h4 className="font-semibold text-blue-900 mb-2">
                         Instrucciones de Pago - {paymentMethods.find(m => m.id === selectedMethod)?.name}
@@ -271,12 +348,12 @@ const Checkout = () => {
                   )}
 
                   <Button type="submit" className="w-full btn-primary text-lg py-3">
-                    Confirmar Pago - ${plan.price} USD
+                    {isUpgrade ? `Actualizar a ${plan.name} - $${plan.price} USD` : `Confirmar Pago - $${plan.price} USD`}
                   </Button>
 
                   <p className="text-xs text-gray-500 text-center">
                     Al confirmar el pago aceptas nuestros términos y condiciones. 
-                    Tu suscripción se activará una vez confirmemos el pago.
+                    {isUpgrade ? 'Tu plan se actualizará inmediatamente.' : 'Tu suscripción se activará una vez confirmemos el pago.'}
                   </p>
                 </form>
               </CardContent>

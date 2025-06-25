@@ -1,5 +1,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   {
@@ -9,38 +10,68 @@ const categories = [
     icon: "🏋️‍♂️",
     count: "12 centros",
     color: "bg-blue-500",
-    gradient: "from-blue-400 to-blue-600"
+    gradient: "from-blue-400 to-blue-600",
+    slug: "gimnasios"
   },
   {
     id: 2,
-    name: "Deportes & Canchas",
-    description: "Reserva canchas de pádel, fútbol, tenis y más deportes",
-    icon: "⚽",
+    name: "Yoga & Pilates",
+    description: "Clases de yoga, pilates y disciplinas de relajación",
+    icon: "🧘‍♀️",
     count: "8 centros",
-    color: "bg-green-500",
-    gradient: "from-green-400 to-green-600"
+    color: "bg-purple-500",
+    gradient: "from-purple-400 to-purple-600",
+    slug: "yoga-pilates"
   },
   {
     id: 3,
-    name: "Spa & Relajación",
-    description: "Masajes, tratamientos faciales y terapias de relajación",
-    icon: "🧘‍♀️",
+    name: "Deportes & Canchas",
+    description: "Reserva canchas de pádel, fútbol, tenis y más deportes",
+    icon: "⚽",
     count: "6 centros",
-    color: "bg-purple-500",
-    gradient: "from-purple-400 to-purple-600"
+    color: "bg-green-500",
+    gradient: "from-green-400 to-green-600",
+    slug: "deportes"
   },
   {
     id: 4,
+    name: "Spa & Relajación",
+    description: "Masajes, tratamientos faciales y terapias de relajación",
+    icon: "💆‍♀️",
+    count: "5 centros",
+    color: "bg-pink-500",
+    gradient: "from-pink-400 to-pink-600",
+    slug: "spa"
+  },
+  {
+    id: 5,
     name: "Belleza & Estética",
     description: "Salones de belleza, peluquerías y centros estéticos",
     icon: "💄",
     count: "10 centros",
-    color: "bg-pink-500",
-    gradient: "from-pink-400 to-pink-600"
+    color: "bg-coral-500",
+    gradient: "from-coral-400 to-coral-600",
+    slug: "belleza"
+  },
+  {
+    id: 6,
+    name: "Barberías",
+    description: "Cortes de cabello, afeitado y cuidado masculino",
+    icon: "✂️",
+    count: "7 centros",
+    color: "bg-gray-500",
+    gradient: "from-gray-400 to-gray-600",
+    slug: "barberias"
   }
 ];
 
 const Categories = () => {
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (slug: string) => {
+    navigate(`/servicios/${slug}`);
+  };
+
   return (
     <section id="servicios" className="py-20 bg-white">
       <div className="container max-w-7xl mx-auto px-4">
@@ -53,12 +84,13 @@ const Categories = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((category, index) => (
             <Card 
               key={category.id} 
               className={`card-hover cursor-pointer border-0 shadow-lg animate-fade-in`}
               style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={() => handleCategoryClick(category.slug)}
             >
               <CardContent className="p-6">
                 <div className="text-center">
@@ -85,7 +117,10 @@ const Categories = () => {
 
         <div className="text-center mt-12">
           <p className="text-gray-500 mb-6">¿No encuentras lo que buscas?</p>
-          <button className="text-cuerpass-600 hover:text-cuerpass-700 font-medium hover:underline transition-colors">
+          <button 
+            className="text-cuerpass-600 hover:text-cuerpass-700 font-medium hover:underline transition-colors"
+            onClick={() => navigate('/contacto')}
+          >
             Solicita un servicio específico →
           </button>
         </div>

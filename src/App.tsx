@@ -22,6 +22,13 @@ import Checkout from "./pages/Checkout";
 import PartnerLogin from "./pages/PartnerLogin";
 import PartnerRegister from "./pages/PartnerRegister";
 import PartnerDashboard from "./pages/PartnerDashboard";
+import PartnerSchedule from "./pages/PartnerSchedule";
+import PartnerReports from "./pages/PartnerReports";
+import PartnerServices from "./pages/PartnerServices";
+import PartnerBookings from "./pages/PartnerBookings";
+import CorporatePlans from "./pages/CorporatePlans";
+import CorporateContact from "./pages/CorporateContact";
+import PlanUpgrade from "./pages/PlanUpgrade";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +43,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/como-funciona" element={<HowItWorks />} />
             <Route path="/empresas" element={<ForCompanies />} />
+            <Route path="/empresas/planes" element={<CorporatePlans />} />
+            <Route path="/empresas/contacto" element={<CorporateContact />} />
             <Route path="/socios" element={<ForPartners />} />
             <Route path="/contacto" element={<Contact />} />
             <Route path="/login" element={<Login />} />
@@ -43,12 +52,17 @@ const App = () => (
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/actualizar-plan" element={<PlanUpgrade />} />
             <Route path="/servicios" element={<Services />} />
             <Route path="/servicios/:categoria" element={<ServicesByCategory />} />
             <Route path="/centro/:id" element={<CenterDetails />} />
             <Route path="/socios/login" element={<PartnerLogin />} />
             <Route path="/socios/registro" element={<PartnerRegister />} />
             <Route path="/socios/dashboard" element={<PartnerDashboard />} />
+            <Route path="/socios/horarios" element={<PartnerSchedule />} />
+            <Route path="/socios/reportes" element={<PartnerReports />} />
+            <Route path="/socios/servicios" element={<PartnerServices />} />
+            <Route path="/socios/reservas" element={<PartnerBookings />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
