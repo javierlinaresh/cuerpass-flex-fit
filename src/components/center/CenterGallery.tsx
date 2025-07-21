@@ -1,8 +1,9 @@
 
 import { Card, CardContent } from "@/components/ui/card";
+import { Business } from "@/types";
 
 interface CenterGalleryProps {
-  center: any;
+  center: Business;
 }
 
 const CenterGallery = ({ center }: CenterGalleryProps) => {

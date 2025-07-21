@@ -9,9 +9,10 @@ import CenterServices from "@/components/center/CenterServices";
 import CenterDescription from "@/components/center/CenterDescription";
 import CenterGallery from "@/components/center/CenterGallery";
 import CenterSidebar from "@/components/center/CenterSidebar";
+import { Business, Service } from "@/types";
 
 // Mock data - en producción vendría de una API
-const centersData: Record<string, any> = {
+const centersData: Record<string, Business> = {
   "1": {
     id: "1",
     name: "Gold's Gym Las Mercedes",
@@ -47,7 +48,7 @@ const CenterDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [center, setCenter] = useState<any>(null);
+  const [center, setCenter] = useState<Business | null>(null);
 
   useEffect(() => {
     console.log('CenterDetails - Location state:', location.state);
@@ -70,7 +71,7 @@ const CenterDetails = () => {
     setCenter(centerData);
   }, [id, location.state]);
 
-  const handleReservation = (service: any) => {
+  const handleReservation = (service: Service) => {
     if (!isAuthenticated) {
       toast({
         title: "Inicia Sesión",

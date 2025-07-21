@@ -1,9 +1,10 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Business } from "@/types";
 
 interface CenterFeaturesProps {
-  center: any;
+  center: Business;
 }
 
 const CenterFeatures = ({ center }: CenterFeaturesProps) => {

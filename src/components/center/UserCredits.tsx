@@ -1,12 +1,17 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { User } from "@/types";
 
 interface UserCreditsProps {
-  user: any;
+  user: User | null;
 }
 
 const UserCredits = ({ user }: UserCreditsProps) => {
+  if (!user) {
+    return null;
+  }
+
   return (
     <Card className="border-0 shadow-lg bg-gradient-to-r from-cuerpass-500 to-coral-500 text-white">
       <CardContent className="p-6 text-center">

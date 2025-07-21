@@ -1,18 +1,11 @@
 
 import React, { createContext, useContext, useState } from 'react';
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  credits: number;
-  type: 'user' | 'partner';
-}
+import { User, RegisterData } from '@/types';
 
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string, userType?: 'user' | 'partner') => Promise<boolean>;
-  register: (data: any) => Promise<boolean>;
+  register: (data: RegisterData) => Promise<boolean>;
   logout: () => void;
   isAuthenticated: boolean;
 }
@@ -24,7 +17,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string, userType: 'user' | 'partner' = 'user') => {
     // Simulación de login - en producción esto sería una llamada a la API
-    console.log('Login attempt:', { email, password, userType });
+    // TODO: Replace with actual API call - DO NOT log passwords in production
+    console.log('Login attempt:', { email, userType });
     
     const mockUser: User = {
       id: '1',
@@ -38,7 +32,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return true;
   };
 
-  const register = async (data: any) => {
+  const register = async (data: RegisterData) => {
+    // TODO: Replace with actual API call
     console.log('Registration attempt:', data);
     
     const newUser: User = {

@@ -2,10 +2,11 @@
 import CenterInfo from "./CenterInfo";
 import CenterFeatures from "./CenterFeatures";
 import UserCredits from "./UserCredits";
+import { Business, User } from "@/types";
 
 interface CenterSidebarProps {
-  center: any;
-  user: any;
+  center: Business;
+  user: User | null;
   isAuthenticated: boolean;
 }
 

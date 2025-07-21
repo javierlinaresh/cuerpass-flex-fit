@@ -1,9 +1,10 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Business } from "@/types";
 
 interface CenterHeroProps {
-  center: any;
+  center: Business;
 }
 
 const CenterHero = ({ center }: CenterHeroProps) => {

@@ -5,32 +5,42 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
-import Services from "./pages/Services";
-import ServicesByCategory from "./pages/ServicesByCategory";
-import CenterDetails from "./pages/CenterDetails";
-import HowItWorks from "./pages/HowItWorks";
-import ForCompanies from "./pages/ForCompanies";
-import ForPartners from "./pages/ForPartners";
-import Contact from "./pages/Contact";
-import Checkout from "./pages/Checkout";
-import PartnerLogin from "./pages/PartnerLogin";
-import PartnerRegister from "./pages/PartnerRegister";
-import PartnerDashboard from "./pages/PartnerDashboard";
-import PartnerSchedule from "./pages/PartnerSchedule";
-import PartnerReports from "./pages/PartnerReports";
-import PartnerServices from "./pages/PartnerServices";
-import PartnerBookings from "./pages/PartnerBookings";
-import CorporatePlans from "./pages/CorporatePlans";
-import CorporateContact from "./pages/CorporateContact";
-import PlanUpgrade from "./pages/PlanUpgrade";
+import { lazy, Suspense } from "react";
+
+// Lazy load components for better performance
+const Index = lazy(() => import("./pages/Index"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Profile = lazy(() => import("./pages/Profile"));
+const Services = lazy(() => import("./pages/Services"));
+const ServicesByCategory = lazy(() => import("./pages/ServicesByCategory"));
+const CenterDetails = lazy(() => import("./pages/CenterDetails"));
+const HowItWorks = lazy(() => import("./pages/HowItWorks"));
+const ForCompanies = lazy(() => import("./pages/ForCompanies"));
+const ForPartners = lazy(() => import("./pages/ForPartners"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const PartnerLogin = lazy(() => import("./pages/PartnerLogin"));
+const PartnerRegister = lazy(() => import("./pages/PartnerRegister"));
+const PartnerDashboard = lazy(() => import("./pages/PartnerDashboard"));
+const PartnerSchedule = lazy(() => import("./pages/PartnerSchedule"));
+const PartnerReports = lazy(() => import("./pages/PartnerReports"));
+const PartnerServices = lazy(() => import("./pages/PartnerServices"));
+const PartnerBookings = lazy(() => import("./pages/PartnerBookings"));
+const CorporatePlans = lazy(() => import("./pages/CorporatePlans"));
+const CorporateContact = lazy(() => import("./pages/CorporateContact"));
+const PlanUpgrade = lazy(() => import("./pages/PlanUpgrade"));
 
 const queryClient = new QueryClient();
+
+// Loading component for lazy-loaded routes
+const LoadingSpinner = () => (
+  <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex items-center justify-center">
+    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-cuerpass-600"></div>
+  </div>
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -39,32 +49,34 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/como-funciona" element={<HowItWorks />} />
-            <Route path="/empresas" element={<ForCompanies />} />
-            <Route path="/empresas/planes" element={<CorporatePlans />} />
-            <Route path="/empresas/contacto" element={<CorporateContact />} />
-            <Route path="/socios" element={<ForPartners />} />
-            <Route path="/contacto" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/actualizar-plan" element={<PlanUpgrade />} />
-            <Route path="/servicios" element={<Services />} />
-            <Route path="/servicios/:categoria" element={<ServicesByCategory />} />
-            <Route path="/centro/:id" element={<CenterDetails />} />
-            <Route path="/socios/login" element={<PartnerLogin />} />
-            <Route path="/socios/registro" element={<PartnerRegister />} />
-            <Route path="/socios/dashboard" element={<PartnerDashboard />} />
-            <Route path="/socios/horarios" element={<PartnerSchedule />} />
-            <Route path="/socios/reportes" element={<PartnerReports />} />
-            <Route path="/socios/servicios" element={<PartnerServices />} />
-            <Route path="/socios/reservas" element={<PartnerBookings />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/como-funciona" element={<HowItWorks />} />
+              <Route path="/empresas" element={<ForCompanies />} />
+              <Route path="/empresas/planes" element={<CorporatePlans />} />
+              <Route path="/empresas/contacto" element={<CorporateContact />} />
+              <Route path="/socios" element={<ForPartners />} />
+              <Route path="/contacto" element={<Contact />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/actualizar-plan" element={<PlanUpgrade />} />
+              <Route path="/servicios" element={<Services />} />
+              <Route path="/servicios/:categoria" element={<ServicesByCategory />} />
+              <Route path="/centro/:id" element={<CenterDetails />} />
+              <Route path="/socios/login" element={<PartnerLogin />} />
+              <Route path="/socios/registro" element={<PartnerRegister />} />
+              <Route path="/socios/dashboard" element={<PartnerDashboard />} />
+              <Route path="/socios/horarios" element={<PartnerSchedule />} />
+              <Route path="/socios/reportes" element={<PartnerReports />} />
+              <Route path="/socios/servicios" element={<PartnerServices />} />
+              <Route path="/socios/reservas" element={<PartnerBookings />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>
