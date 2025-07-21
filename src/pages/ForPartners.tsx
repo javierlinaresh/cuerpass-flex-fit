@@ -1,3 +1,4 @@
+
 import Header from "@/components/Header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -104,8 +105,8 @@ const ForPartners = () => {
             <span className="text-gradient"> Sin Invertir</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Únete a la red de bienestar más activa de Caracas. Como Wellhub, Gympass o Totalpass, 
-            conectamos tu negocio con usuarios que ya están listos para comprar tus servicios.
+            Únete a la red de bienestar más activa de Venezuela, 
+            conectamos tu negocio con usuarios listos para acceder a tus servicios!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/socios/registro">
