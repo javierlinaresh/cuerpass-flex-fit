@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Services from "./pages/Services";
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/empresas/contacto" element={<CorporateContact />} />
             <Route path="/socios" element={<ForPartners />} />
             <Route path="/contacto" element={<Contact />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/checkout" element={<Checkout />} />

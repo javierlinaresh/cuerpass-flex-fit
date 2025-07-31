@@ -1,21 +1,27 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { User, Search, LogOut } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
+import { Button } from '@/components/ui/button';
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { User, LogOut, Settings, Calendar } from 'lucide-react';
+
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const {
-    user,
-    logout,
-    isAuthenticated
-  } = useAuth();
   const navigate = useNavigate();
-  const handleLogout = () => {
-    logout();
+  const { user, profile, logout, isAuthenticated } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleLogout = async () => {
+    await logout();
     navigate('/');
   };
-  return <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-orange-100">
+
+  return (
+    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-orange-100">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -57,32 +63,70 @@ const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-3">
-            {isAuthenticated ? <>
-                <Button variant="ghost" size="sm" className="text-gray-600">
-                  <Search className="w-4 h-4 mr-2" />
-                  Buscar
+            {isAuthenticated ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="flex items-center gap-2"
+                  >
+                    <User className="h-4 w-4" />
+                    {profile?.role === 'partner' ? (
+                      <span>Panel de Socio</span>
+                    ) : (
+                      <span>{profile?.full_name || user?.email}</span>
+                    )}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuItem onClick={() => navigate('/profile')}>
+                    <Settings className="mr-2 h-4 w-4" />
+                    Mi Perfil
+                  </DropdownMenuItem>
+                  
+                  {profile?.role === 'partner' ? (
+                    <>
+                      <DropdownMenuItem onClick={() => navigate('/partner-dashboard')}>
+                        <Calendar className="mr-2 h-4 w-4" />
+                        {profile?.business_name || profile?.full_name}
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => navigate('/partner-services')}>
+                        Mis Servicios
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => navigate('/partner-bookings')}>
+                        Reservas
+                      </DropdownMenuItem>
+                    </>
+                  ) : (
+                    <>
+                      <DropdownMenuItem onClick={() => navigate('/dashboard')}>
+                        <Calendar className="mr-2 h-4 w-4" />
+                        Mi Dashboard
+                      </DropdownMenuItem>
+                    </>
+                  )}
+                  
+                  <DropdownMenuItem onClick={handleLogout}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Cerrar Sesión
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <div className="flex items-center gap-4">
+                <Button 
+                  variant="ghost" 
+                  onClick={() => navigate('/auth')}
+                >
+                  Iniciar Sesión
                 </Button>
-                <Link to={user?.type === 'partner' ? '/socios/dashboard' : '/dashboard'}>
-                  <Button variant="ghost" size="sm" className="text-gray-600">
-                    <User className="w-4 h-4 mr-2" />
-                    {user?.name}
-                  </Button>
-                </Link>
-                <Button variant="ghost" size="sm" onClick={handleLogout} className="text-gray-600">
-                  <LogOut className="w-4 h-4" />
+                <Button 
+                  onClick={() => navigate('/auth')}
+                >
+                  Registrarse
                 </Button>
-              </> : <>
-                <Link to="/login">
-                  <Button variant="ghost" size="sm" className="text-gray-600">
-                    Iniciar Sesión
-                  </Button>
-                </Link>
-                <Link to="/register">
-                  <Button className="btn-primary">
-                    Registrarse
-                  </Button>
-                </Link>
-              </>}
+              </div>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -96,7 +140,8 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && <div className="md:hidden py-4 border-t border-orange-100">
+        {isMenuOpen && (
+          <div className="md:hidden py-4 border-t border-orange-100">
             <nav className="flex flex-col space-y-3">
               <Link to="/servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
                 Servicios
@@ -117,32 +162,39 @@ const Header = () => {
                 Contacto
               </Link>
               
-              {isAuthenticated ? <div className="flex flex-col space-y-2 pt-4">
-                  <Link to={user?.type === 'partner' ? '/socios/dashboard' : '/dashboard'}>
+              {isAuthenticated ? (
+                <div className="flex flex-col space-y-2 pt-4">
+                  <Link to={profile?.role === 'partner' ? '/partner-dashboard' : '/dashboard'}>
                     <Button variant="ghost" className="justify-start w-full">
                       <User className="w-4 h-4 mr-2" />
-                      {user?.name}
+                      {profile?.full_name || user?.email}
                     </Button>
                   </Link>
                   <Button variant="ghost" onClick={handleLogout} className="justify-start w-full">
                     <LogOut className="w-4 h-4 mr-2" />
                     Salir
                   </Button>
-                </div> : <div className="flex flex-col space-y-2 pt-4">
-                  <Link to="/login">
+                </div>
+              ) : (
+                <div className="flex flex-col space-y-2 pt-4">
+                  <Link to="/auth">
                     <Button variant="ghost" className="justify-start w-full">
                       Iniciar Sesión
                     </Button>
                   </Link>
-                  <Link to="/register">
+                  <Link to="/auth">
                     <Button className="btn-primary w-full">
                       Registrarse
                     </Button>
                   </Link>
-                </div>}
+                </div>
+              )}
             </nav>
-          </div>}
+          </div>
+        )}
       </div>
-    </header>;
+    </header>
+  );
 };
+
 export default Header;
