@@ -14,6 +14,169 @@ export type Database = {
   }
   public: {
     Tables: {
+      bookings: {
+        Row: {
+          booking_notes: string | null
+          class_id: number
+          created_at: string
+          credits_used: number
+          customer_id: string
+          id: number
+          status: Database["public"]["Enums"]["booking_status"]
+          updated_at: string
+        }
+        Insert: {
+          booking_notes?: string | null
+          class_id: number
+          created_at?: string
+          credits_used?: number
+          customer_id: string
+          id?: number
+          status?: Database["public"]["Enums"]["booking_status"]
+          updated_at?: string
+        }
+        Update: {
+          booking_notes?: string | null
+          class_id?: number
+          created_at?: string
+          credits_used?: number
+          customer_id?: string
+          id?: number
+          status?: Database["public"]["Enums"]["booking_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "classes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      check_ins: {
+        Row: {
+          booking_id: number
+          check_in_time: string
+          class_id: number
+          created_at: string
+          customer_id: string
+          id: number
+          qr_code: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          booking_id: number
+          check_in_time?: string
+          class_id: number
+          created_at?: string
+          customer_id: string
+          id?: number
+          qr_code?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          booking_id?: number
+          check_in_time?: string
+          class_id?: number
+          created_at?: string
+          customer_id?: string
+          id?: number
+          qr_code?: string | null
+          verified_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "check_ins_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "check_ins_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "classes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "check_ins_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "check_ins_verified_by_fkey"
+            columns: ["verified_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      classes: {
+        Row: {
+          capacity: number
+          created_at: string
+          duration_minutes: number
+          id: number
+          instructor_name: string | null
+          is_cancelled: boolean | null
+          service_id: number
+          special_notes: string | null
+          spots_available: number
+          start_time: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          capacity?: number
+          created_at?: string
+          duration_minutes?: number
+          id?: number
+          instructor_name?: string | null
+          is_cancelled?: boolean | null
+          service_id: number
+          special_notes?: string | null
+          spots_available?: number
+          start_time: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          capacity?: number
+          created_at?: string
+          duration_minutes?: number
+          id?: number
+          instructor_name?: string | null
+          is_cancelled?: boolean | null
+          service_id?: number
+          special_notes?: string | null
+          spots_available?: number
+          start_time?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "classes_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       "Cuerpass Socios": {
         Row: {
           created_at: string
@@ -29,6 +192,108 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          business_address: string | null
+          business_description: string | null
+          business_name: string | null
+          created_at: string
+          credits_remaining: number | null
+          full_name: string
+          id: string
+          is_verified: boolean | null
+          membership_expires_at: string | null
+          membership_type: Database["public"]["Enums"]["membership_type"] | null
+          phone: string | null
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at: string
+          username: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          business_address?: string | null
+          business_description?: string | null
+          business_name?: string | null
+          created_at?: string
+          credits_remaining?: number | null
+          full_name: string
+          id: string
+          is_verified?: boolean | null
+          membership_expires_at?: string | null
+          membership_type?:
+            | Database["public"]["Enums"]["membership_type"]
+            | null
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          username: string
+        }
+        Update: {
+          avatar_url?: string | null
+          business_address?: string | null
+          business_description?: string | null
+          business_name?: string | null
+          created_at?: string
+          credits_remaining?: number | null
+          full_name?: string
+          id?: string
+          is_verified?: boolean | null
+          membership_expires_at?: string | null
+          membership_type?:
+            | Database["public"]["Enums"]["membership_type"]
+            | null
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          username?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          category: string
+          created_at: string
+          credits_required: number
+          description: string | null
+          id: number
+          is_active: boolean | null
+          name: string
+          partner_id: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          credits_required?: number
+          description?: string | null
+          id?: number
+          is_active?: boolean | null
+          name: string
+          partner_id: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          credits_required?: number
+          description?: string | null
+          id?: number
+          is_active?: boolean | null
+          name?: string
+          partner_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "services_partner_id_fkey"
+            columns: ["partner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -37,7 +302,14 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      booking_status: "confirmed" | "cancelled" | "waitlisted" | "completed"
+      membership_type:
+        | "basic_monthly"
+        | "premium_annual"
+        | "10_class_pack"
+        | "unlimited_monthly"
+        | "day_pass"
+      user_role: "customer" | "partner"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -164,6 +436,16 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      booking_status: ["confirmed", "cancelled", "waitlisted", "completed"],
+      membership_type: [
+        "basic_monthly",
+        "premium_annual",
+        "10_class_pack",
+        "unlimited_monthly",
+        "day_pass",
+      ],
+      user_role: ["customer", "partner"],
+    },
   },
 } as const
