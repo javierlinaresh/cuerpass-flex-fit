@@ -12,13 +12,13 @@ import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 
 const PartnerServices = () => {
-  const { user, isAuthenticated } = useAuth();
+  const { user, profile, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    if (!isAuthenticated || user?.type !== 'partner') {
-      navigate('/socios/login');
+    if (!isAuthenticated || profile?.role !== 'partner') {
+      navigate('/auth');
     }
   }, [isAuthenticated, user, navigate]);
 
@@ -104,7 +104,7 @@ const PartnerServices = () => {
     });
   };
 
-  if (!user) return null;
+  if (!profile) return null;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
@@ -121,7 +121,7 @@ const PartnerServices = () => {
           <div className="flex justify-between items-center">
             <div>
               <h1 className="font-display font-bold text-3xl text-gray-900 mb-2">
-                Gestionar Servicios - {user.name}
+                Gestionar Servicios - {profile.business_name || profile.full_name}
               </h1>
               <p className="text-gray-600">
                 Administra los servicios que ofreces a través de Cuerpass

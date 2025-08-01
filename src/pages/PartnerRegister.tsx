@@ -35,13 +35,26 @@ const PartnerRegister = () => {
     setIsLoading(true);
 
     try {
-      const success = await register(formData);
-      if (success) {
+      const { error } = await register({
+        email: formData.email,
+        password: formData.password,
+        full_name: formData.ownerName,
+        username: formData.email.split('@')[0],
+        role: 'partner',
+        business_name: formData.businessName,
+      });
+      if (!error) {
         toast({
           title: "¡Registro exitoso!",
-          description: "Tu negocio ha sido registrado. Pronto nos pondremos en contacto contigo.",
+          description: "Tu negocio ha sido registrado. Revisa tu email para confirmar tu cuenta.",
         });
-        navigate('/socios/dashboard');
+        navigate('/auth');
+      } else {
+        toast({
+          title: "Error",
+          description: error.message || "Hubo un problema al registrar tu negocio",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       toast({

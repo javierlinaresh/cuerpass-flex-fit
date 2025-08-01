@@ -21,13 +21,19 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const success = await login(email, password, 'user');
-      if (success) {
+      const { error } = await login(email, password);
+      if (!error) {
         toast({
           title: "¡Bienvenido!",
           description: "Has iniciado sesión correctamente.",
         });
         navigate('/dashboard');
+      } else {
+        toast({
+          title: "Error de inicio de sesión",
+          description: error.message || "No se pudo iniciar sesión",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       toast({

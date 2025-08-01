@@ -10,12 +10,12 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const PartnerBookings = () => {
-  const { user, isAuthenticated } = useAuth();
+  const { user, profile, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isAuthenticated || user?.type !== 'partner') {
-      navigate('/socios/login');
+    if (!isAuthenticated || profile?.role !== 'partner') {
+      navigate('/auth');
     }
   }, [isAuthenticated, user, navigate]);
 
@@ -101,7 +101,7 @@ const PartnerBookings = () => {
     );
   };
 
-  if (!user) return null;
+  if (!profile) return null;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
@@ -116,7 +116,7 @@ const PartnerBookings = () => {
             ← Volver al Dashboard
           </Button>
           <h1 className="font-display font-bold text-3xl text-gray-900 mb-2">
-            Historial de Reservas - {user.name}
+            Historial de Reservas - {profile.business_name || profile.full_name}
           </h1>
           <p className="text-gray-600">
             Gestiona y revisa todas las reservas de tu negocio

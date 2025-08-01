@@ -9,16 +9,16 @@ import { Badge } from "@/components/ui/badge";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
 
 const PartnerReports = () => {
-  const { user, isAuthenticated } = useAuth();
+  const { user, profile, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isAuthenticated || user?.type !== 'partner') {
-      navigate('/socios/login');
+    if (!isAuthenticated || profile?.role !== 'partner') {
+      navigate('/auth');
     }
   }, [isAuthenticated, user, navigate]);
 
-  if (!user) return null;
+  if (!profile) return null;
 
   const monthlyData = [
     { month: 'Ene', reservas: 89, ingresos: 2340 },
@@ -60,7 +60,7 @@ const PartnerReports = () => {
             ← Volver al Dashboard
           </Button>
           <h1 className="font-display font-bold text-3xl text-gray-900 mb-2">
-            Reporte Completo - {user.name}
+            Reporte Completo - {profile.business_name || profile.full_name}
           </h1>
           <p className="text-gray-600">
             Análisis detallado del rendimiento de tu negocio

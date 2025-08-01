@@ -42,7 +42,7 @@ const centersData: Record<string, any> = {
 
 const CenterDetails = () => {
   const { id } = useParams();
-  const { user, isAuthenticated } = useAuth();
+  const { user, profile, isAuthenticated } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
@@ -81,10 +81,10 @@ const CenterDetails = () => {
       return;
     }
 
-    if (!user || user.credits < service.credits) {
+    if (!profile || !profile.credits_remaining || profile.credits_remaining < service.credits) {
       toast({
         title: "Créditos Insuficientes",
-        description: `Necesitas ${service.credits} créditos para este servicio. Tienes ${user.credits}.`,
+        description: `Necesitas ${service.credits} créditos para este servicio. Tienes ${profile?.credits_remaining || 0}.`,
         variant: "destructive"
       });
       return;
@@ -132,7 +132,7 @@ const CenterDetails = () => {
           {/* Sidebar */}
           <CenterSidebar 
             center={center} 
-            user={user} 
+            user={profile} 
             isAuthenticated={isAuthenticated} 
           />
         </div>

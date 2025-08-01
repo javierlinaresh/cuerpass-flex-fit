@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 const Dashboard = () => {
-  const { user, isAuthenticated } = useAuth();
+  const { user, profile, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const Dashboard = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  if (!user) return null;
+  if (!profile) return null;
 
   const recentReservations = [
     {
@@ -47,7 +47,7 @@ const Dashboard = () => {
         {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="font-display font-bold text-3xl text-gray-900 mb-2">
-            ¡Hola, {user.name}! 👋
+            ¡Hola, {profile.full_name}! 👋
           </h1>
           <p className="text-gray-600">
             Aquí puedes gestionar tus créditos, reservas y explorar nuevos centros
@@ -59,7 +59,7 @@ const Dashboard = () => {
           <Card className="border-0 shadow-lg">
             <CardContent className="p-6 text-center">
               <div className="text-3xl font-bold text-cuerpass-600 mb-2">
-                {user.credits}
+                {profile.credits_remaining}
               </div>
               <p className="text-gray-600 text-sm">Créditos Disponibles</p>
             </CardContent>

@@ -42,13 +42,25 @@ const Register = () => {
     setIsLoading(true);
 
     try {
-      const success = await register(formData);
-      if (success) {
+      const { error } = await register({
+        email: formData.email,
+        password: formData.password,
+        full_name: formData.name,
+        username: formData.email.split('@')[0],
+        role: 'customer',
+      });
+      if (!error) {
         toast({
           title: "¡Registro exitoso!",
-          description: "Te hemos regalado 10 créditos de bienvenida.",
+          description: "Revisa tu email para confirmar tu cuenta y recibir 10 créditos de bienvenida.",
         });
-        navigate('/dashboard');
+        navigate('/auth');
+      } else {
+        toast({
+          title: "Error",
+          description: error.message || "Hubo un problema al crear tu cuenta",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       toast({

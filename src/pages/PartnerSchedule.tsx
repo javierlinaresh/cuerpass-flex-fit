@@ -11,13 +11,13 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 
 const PartnerSchedule = () => {
-  const { user, isAuthenticated } = useAuth();
+  const { user, profile, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    if (!isAuthenticated || user?.type !== 'partner') {
-      navigate('/socios/login');
+    if (!isAuthenticated || profile?.role !== 'partner') {
+      navigate('/auth');
     }
   }, [isAuthenticated, user, navigate]);
 
@@ -58,7 +58,7 @@ const PartnerSchedule = () => {
     });
   };
 
-  if (!user) return null;
+  if (!profile) return null;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
@@ -73,7 +73,7 @@ const PartnerSchedule = () => {
             ← Volver al Dashboard
           </Button>
           <h1 className="font-display font-bold text-3xl text-gray-900 mb-2">
-            Configurar Horarios - {user.name}
+            Configurar Horarios - {profile.business_name || profile.full_name}
           </h1>
           <p className="text-gray-600">
             Establece los horarios de apertura y cierre para cada día

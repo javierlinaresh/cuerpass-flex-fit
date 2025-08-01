@@ -30,13 +30,19 @@ const PartnerLogin = () => {
     setIsLoading(true);
 
     try {
-      const success = await login(formData.email, formData.password, 'partner');
-      if (success) {
+      const { error } = await login(formData.email, formData.password);
+      if (!error) {
         toast({
           title: "¡Bienvenido!",
           description: "Has accedido al panel de socio.",
         });
         navigate('/socios/dashboard');
+      } else {
+        toast({
+          title: "Error",
+          description: error.message || "Credenciales incorrectas",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       toast({
