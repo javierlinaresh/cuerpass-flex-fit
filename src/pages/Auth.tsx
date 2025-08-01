@@ -56,7 +56,7 @@ export default function Auth() {
           title: "¡Bienvenido!",
           description: "Has iniciado sesión correctamente",
         });
-        navigate('/');
+        navigate('/dashboard');
       }
     } catch (error) {
       toast({
@@ -178,6 +178,12 @@ export default function Auth() {
                         onChange={(e) => setLoginData(prev => ({ ...prev, password: e.target.value }))}
                         required
                       />
+                    </div>
+                    
+                    <div className="text-right mb-4">
+                      <a href="#" className="text-sm text-primary hover:underline">
+                        ¿Olvidaste tu contraseña?
+                      </a>
                     </div>
                     
                     <Button type="submit" className="w-full" disabled={isLoading}>

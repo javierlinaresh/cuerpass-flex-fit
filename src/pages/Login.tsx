@@ -87,6 +87,12 @@ const Login = () => {
                 />
               </div>
 
+              <div className="text-right mb-4">
+                <Link to="/auth" className="text-sm text-cuerpass-600 hover:text-cuerpass-700">
+                  ¿Olvidaste tu contraseña?
+                </Link>
+              </div>
+
               <Button type="submit" className="w-full btn-primary" disabled={isLoading}>
                 {isLoading ? "Iniciando..." : "Iniciar Sesión"}
               </Button>

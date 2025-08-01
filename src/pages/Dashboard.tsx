@@ -1,23 +1,16 @@
 
-import { useEffect } from "react";
+import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
 import Header from "@/components/Header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 const Dashboard = () => {
-  const { user, profile, isAuthenticated } = useAuth();
+  const { profile, loading } = useAuthRedirect('customer');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/login');
-    }
-  }, [isAuthenticated, navigate]);
-
-  if (!profile) return null;
+  if (loading || !profile) return null;
 
   const recentReservations = [
     {

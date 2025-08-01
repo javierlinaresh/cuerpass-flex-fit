@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,15 +7,30 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Switch } from "@/components/ui/switch";
 import Header from "@/components/Header";
 import { useToast } from "@/hooks/use-toast";
+import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 
 const Profile = () => {
   const { toast } = useToast();
+  const { profile, loading } = useAuthRedirect('customer');
   const [formData, setFormData] = useState({
-    name: "María González",
-    email: "maria@email.com",
-    phone: "+58 414 123-4567",
-    birthDate: "1990-05-15"
+    name: "",
+    email: "",
+    phone: "",
+    birthDate: ""
   });
+
+  useEffect(() => {
+    if (profile) {
+      setFormData({
+        name: profile.full_name || "",
+        email: profile.id || "", // User email from auth
+        phone: profile.phone || "",
+        birthDate: ""
+      });
+    }
+  }, [profile]);
+
+  if (loading || !profile) return null;
 
   const [passwordData, setPasswordData] = useState({
     current: "",
@@ -171,7 +186,7 @@ const Profile = () => {
                     Plan Premium
                   </Badge>
                   <div className="text-2xl font-bold text-cuerpass-600 mb-2">
-                    12
+                    {profile.credits_remaining || 0}
                   </div>
                   <p className="text-sm text-gray-600 mb-4">
                     Créditos disponibles
