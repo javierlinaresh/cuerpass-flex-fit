@@ -113,19 +113,11 @@ const Header = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <div className="flex items-center gap-4">
-                <Button 
-                  variant="ghost" 
-                  onClick={() => navigate('/auth')}
-                >
-                  Iniciar Sesión
-                </Button>
-                <Button 
-                  onClick={() => navigate('/auth')}
-                >
-                  Registrarse
-                </Button>
-              </div>
+              <Button 
+                onClick={() => navigate('/auth')}
+              >
+                Iniciar Sesión
+              </Button>
             )}
           </div>
 
@@ -176,15 +168,10 @@ const Header = () => {
                   </Button>
                 </div>
               ) : (
-                <div className="flex flex-col space-y-2 pt-4">
-                  <Link to="/auth">
-                    <Button variant="ghost" className="justify-start w-full">
-                      Iniciar Sesión
-                    </Button>
-                  </Link>
+                <div className="pt-4">
                   <Link to="/auth">
                     <Button className="btn-primary w-full">
-                      Registrarse
+                      Iniciar Sesión
                     </Button>
                   </Link>
                 </div>
