@@ -30,6 +30,7 @@ import PartnerBookings from "./pages/PartnerBookings";
 import CorporatePlans from "./pages/CorporatePlans";
 import CorporateContact from "./pages/CorporateContact";
 import PlanUpgrade from "./pages/PlanUpgrade";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -52,12 +53,12 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/checkout" element={<Checkout />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/actualizar-plan" element={<PlanUpgrade />} />
-            <Route path="/servicios" element={<Services />} />
-            <Route path="/servicios/:categoria" element={<ServicesByCategory />} />
-            <Route path="/centro/:id" element={<CenterDetails />} />
+            <Route path="/dashboard" element={<ProtectedRoute requiredRole="customer"><Dashboard /></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute requiredRole="customer"><Profile /></ProtectedRoute>} />
+            <Route path="/actualizar-plan" element={<ProtectedRoute requiredRole="customer"><PlanUpgrade /></ProtectedRoute>} />
+            <Route path="/servicios" element={<ProtectedRoute requiredRole="customer"><Services /></ProtectedRoute>} />
+            <Route path="/servicios/:categoria" element={<ProtectedRoute requiredRole="customer"><ServicesByCategory /></ProtectedRoute>} />
+            <Route path="/centro/:id" element={<ProtectedRoute requiredRole="customer"><CenterDetails /></ProtectedRoute>} />
             <Route path="/socios/login" element={<PartnerLogin />} />
             <Route path="/socios/registro" element={<PartnerRegister />} />
             <Route path="/socios/dashboard" element={<PartnerDashboard />} />

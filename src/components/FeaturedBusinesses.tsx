@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const businesses = [
   {
@@ -105,9 +106,14 @@ const businesses = [
 
 const FeaturedBusinesses = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   const handleBusinessClick = (business: any) => {
-    navigate(`/centro/${business.id}`, { state: { business } });
+    if (isAuthenticated) {
+      navigate(`/centro/${business.id}`, { state: { business } });
+    } else {
+      navigate('/auth');
+    }
   };
 
   return (
@@ -115,10 +121,10 @@ const FeaturedBusinesses = () => {
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="font-display font-bold text-3xl md:text-4xl text-gray-900 mb-4">
-            Centros Destacados
+            Centros Aliados
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Descubre algunos de nuestros socios más populares: desde gimnasios hasta canchas deportivas, spas de lujo y barberías especializadas.
+            Conoce algunos de nuestros centros aliados. Inicia sesión para explorar servicios completos, ver disponibilidad y realizar reservas.
           </p>
         </div>
 
@@ -159,38 +165,26 @@ const FeaturedBusinesses = () => {
                 </div>
 
                 <div className="space-y-2 mb-4">
-                  {business.services.map((service, idx) => (
-                    <div key={idx} className="flex justify-between items-center p-2 bg-gray-50 rounded-lg">
-                      <div className="flex-1">
-                        <span className="text-gray-700 text-xs block">{service.name}</span>
-                        {service.note && (
-                          <span className="text-gray-500 text-xs">{service.note}</span>
-                        )}
-                        {(service.instructor || service.barber || service.therapist) && (
-                          <span className="text-cuerpass-600 text-xs">
-                            {service.instructor && `Instructor: ${service.instructor}`}
-                            {service.barber && `Barbero: ${service.barber}`}
-                            {service.therapist && `Terapeuta: ${service.therapist}`}
-                          </span>
-                        )}
-                      </div>
-                      <Badge className="bg-cuerpass-100 text-cuerpass-700 text-xs ml-2">
-                        {service.credits} créditos
+                  <p className="text-gray-600 text-sm">
+                    Especializado en {business.type.toLowerCase()}
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    {business.features.slice(0, 2).map((feature, idx) => (
+                      <Badge key={idx} variant="secondary" className="text-xs">
+                        {feature}
                       </Badge>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
 
-                <div className="flex flex-wrap gap-1 mb-4">
-                  {business.features.map((feature, idx) => (
-                    <Badge key={idx} variant="secondary" className="text-xs">
-                      {feature}
-                    </Badge>
-                  ))}
-                </div>
-
-                <Button className="w-full btn-primary text-sm">
-                  Ver Disponibilidad
+                <Button 
+                  className="w-full btn-primary text-sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate('/auth');
+                  }}
+                >
+                  Inicia Sesión para Ver Servicios
                 </Button>
               </CardContent>
             </Card>
@@ -202,9 +196,9 @@ const FeaturedBusinesses = () => {
             variant="outline" 
             size="lg" 
             className="border-2 border-cuerpass-200 text-cuerpass-700 hover:bg-cuerpass-50"
-            onClick={() => navigate('/servicios')}
+            onClick={() => navigate('/auth')}
           >
-            Ver Todos Los Centros
+            Inicia Sesión para Explorar Servicios
           </Button>
         </div>
       </div>

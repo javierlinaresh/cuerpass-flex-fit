@@ -41,9 +41,18 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <Link to="/servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors px-[10px]">
-              Servicios
-            </Link>
+            {isAuthenticated ? (
+              <Link to="/servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors px-[10px]">
+                Servicios
+              </Link>
+            ) : (
+              <button 
+                onClick={() => navigate('/auth')} 
+                className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors px-[10px]"
+              >
+                Servicios
+              </button>
+            )}
             <Link to="/como-funciona" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
               Cómo Funciona
             </Link>
@@ -135,9 +144,18 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-orange-100">
             <nav className="flex flex-col space-y-3">
-              <Link to="/servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
-                Servicios
-              </Link>
+              {isAuthenticated ? (
+                <Link to="/servicios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
+                  Servicios
+                </Link>
+              ) : (
+                <button 
+                  onClick={() => navigate('/auth')} 
+                  className="text-gray-600 hover:text-cuerpass-600 font-medium text-left"
+                >
+                  Servicios
+                </button>
+              )}
               <Link to="/como-funciona" className="text-gray-600 hover:text-cuerpass-600 font-medium">
                 Cómo Funciona
               </Link>
