@@ -109,11 +109,7 @@ const FeaturedBusinesses = () => {
   const { isAuthenticated } = useAuth();
 
   const handleBusinessClick = (business: any) => {
-    if (isAuthenticated) {
-      navigate(`/centro/${business.id}`, { state: { business } });
-    } else {
-      navigate('/auth');
-    }
+    navigate('/servicios');
   };
 
   return (
@@ -124,7 +120,7 @@ const FeaturedBusinesses = () => {
             Centros Aliados
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Conoce algunos de nuestros centros aliados. Inicia sesión para explorar servicios completos, ver disponibilidad y realizar reservas.
+            Descubre nuestros centros aliados especializados en bienestar, deporte y relajación
           </p>
         </div>
 
@@ -181,10 +177,10 @@ const FeaturedBusinesses = () => {
                   className="w-full btn-primary text-sm"
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate('/auth');
+                    navigate('/servicios');
                   }}
                 >
-                  Inicia Sesión para Ver Servicios
+                  Ver Más Información
                 </Button>
               </CardContent>
             </Card>
@@ -196,9 +192,9 @@ const FeaturedBusinesses = () => {
             variant="outline" 
             size="lg" 
             className="border-2 border-cuerpass-200 text-cuerpass-700 hover:bg-cuerpass-50"
-            onClick={() => navigate('/auth')}
+            onClick={() => navigate('/servicios')}
           >
-            Inicia Sesión para Explorar Servicios
+            Explorar Todos los Servicios
           </Button>
         </div>
       </div>

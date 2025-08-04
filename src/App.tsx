@@ -56,8 +56,8 @@ const App = () => (
             <Route path="/dashboard" element={<ProtectedRoute requiredRole="customer"><Dashboard /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute requiredRole="customer"><Profile /></ProtectedRoute>} />
             <Route path="/actualizar-plan" element={<ProtectedRoute requiredRole="customer"><PlanUpgrade /></ProtectedRoute>} />
-            <Route path="/servicios" element={<ProtectedRoute requiredRole="customer"><Services /></ProtectedRoute>} />
-            <Route path="/servicios/:categoria" element={<ProtectedRoute requiredRole="customer"><ServicesByCategory /></ProtectedRoute>} />
+            <Route path="/servicios" element={<Services />} />
+            <Route path="/servicios/:categoria" element={<ServicesByCategory />} />
             <Route path="/centro/:id" element={<ProtectedRoute requiredRole="customer"><CenterDetails /></ProtectedRoute>} />
             <Route path="/socios/login" element={<PartnerLogin />} />
             <Route path="/socios/registro" element={<PartnerRegister />} />

@@ -34,7 +34,7 @@ export default function Auth() {
 
   // Redirect if already authenticated
   if (isAuthenticated) {
-    navigate('/');
+    navigate('/dashboard');
     return null;
   }
 
