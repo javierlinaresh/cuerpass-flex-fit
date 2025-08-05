@@ -7,7 +7,6 @@ import Hero from "@/components/Hero";
 import Categories from "@/components/Categories";
 import FeaturedBusinesses from "@/components/FeaturedBusinesses";
 import TrustedCompanies from "@/components/TrustedCompanies";
-import PricingPlans from "@/components/PricingPlans";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -18,7 +17,6 @@ const Index = () => {
       <Categories />
       <FeaturedBusinesses />
       <TrustedCompanies />
-      <PricingPlans />
       <Footer />
     </div>
   );

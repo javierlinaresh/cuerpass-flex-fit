@@ -32,7 +32,7 @@ const Hero = () => {
                   Explorar Servicios
                 </Button>
               </Link>
-              <Link to="/checkout">
+              <Link to="/precios">
                 <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-2 border-cuerpass-200 text-cuerpass-700 hover:bg-cuerpass-50 w-full sm:w-auto">
                   Ver Precios
                 </Button>

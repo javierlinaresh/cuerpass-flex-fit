@@ -47,15 +47,19 @@ const Header = () => {
             <Link to="/como-funciona" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
               Cómo Funciona
             </Link>
-            <a href="/#precios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
+            <Link to="/precios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
               Precios
-            </a>
-            <Link to="/empresas" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
-              Empresas
             </Link>
-            <Link to="/socios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
-              Socios
-            </Link>
+            {!isAuthenticated && (
+              <>
+                <Link to="/empresas" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
+                  Empresas
+                </Link>
+                <Link to="/socios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
+                  Socios
+                </Link>
+              </>
+            )}
             <Link to="/contacto" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
               Contacto
             </Link>
@@ -79,10 +83,10 @@ const Header = () => {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
-                  <DropdownMenuItem onClick={() => navigate('/profile')}>
-                    <Settings className="mr-2 h-4 w-4" />
-                    Mi Perfil
-                  </DropdownMenuItem>
+                 <DropdownMenuItem onClick={() => navigate('/profile')}>
+                   <Settings className="mr-2 h-4 w-4" />
+                   Mi Locker
+                 </DropdownMenuItem>
                   
                   {profile?.role === 'partner' ? (
                     <>
@@ -141,15 +145,19 @@ const Header = () => {
               <Link to="/como-funciona" className="text-gray-600 hover:text-cuerpass-600 font-medium">
                 Cómo Funciona
               </Link>
-              <a href="/#precios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
+              <Link to="/precios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
                 Precios
-              </a>
-              <Link to="/empresas" className="text-gray-600 hover:text-cuerpass-600 font-medium">
-                Empresas
               </Link>
-              <Link to="/socios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
-                Socios
-              </Link>
+              {!isAuthenticated && (
+                <>
+                  <Link to="/empresas" className="text-gray-600 hover:text-cuerpass-600 font-medium">
+                    Empresas
+                  </Link>
+                  <Link to="/socios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
+                    Socios
+                  </Link>
+                </>
+              )}
               <Link to="/contacto" className="text-gray-600 hover:text-cuerpass-600 font-medium">
                 Contacto
               </Link>
