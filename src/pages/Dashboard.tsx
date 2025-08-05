@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { BookingsList } from "@/components/BookingsList";
 
 const Dashboard = () => {
   const { profile, loading } = useAuthRedirect('customer');
@@ -78,44 +79,16 @@ const Dashboard = () => {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Recent Reservations */}
+          {/* Reservas con QR */}
           <div className="lg:col-span-2">
             <Card className="border-0 shadow-lg">
               <CardHeader>
                 <CardTitle className="font-display text-xl">
-                  Reservas Recientes
+                  Mis Reservas
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  {recentReservations.map((reservation) => (
-                    <div key={reservation.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-gray-900">
-                          {reservation.center}
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                          {reservation.service}
-                        </p>
-                        <p className="text-xs text-gray-500">
-                          {reservation.date} a las {reservation.time}
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <Badge className={`mb-2 ${
-                          reservation.status === 'confirmada' 
-                            ? 'bg-blue-100 text-blue-700' 
-                            : 'bg-green-100 text-green-700'
-                        }`}>
-                          {reservation.status}
-                        </Badge>
-                        <p className="text-sm text-gray-600">
-                          {reservation.credits} créditos
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <BookingsList />
               </CardContent>
             </Card>
           </div>
