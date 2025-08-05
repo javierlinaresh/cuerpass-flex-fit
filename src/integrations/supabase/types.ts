@@ -22,6 +22,8 @@ export type Database = {
           credits_used: number
           customer_id: string
           id: number
+          qr_code: string | null
+          qr_expires_at: string | null
           status: Database["public"]["Enums"]["booking_status"]
           updated_at: string
         }
@@ -32,6 +34,8 @@ export type Database = {
           credits_used?: number
           customer_id: string
           id?: number
+          qr_code?: string | null
+          qr_expires_at?: string | null
           status?: Database["public"]["Enums"]["booking_status"]
           updated_at?: string
         }
@@ -42,6 +46,8 @@ export type Database = {
           credits_used?: number
           customer_id?: string
           id?: number
+          qr_code?: string | null
+          qr_expires_at?: string | null
           status?: Database["public"]["Enums"]["booking_status"]
           updated_at?: string
         }
@@ -70,7 +76,6 @@ export type Database = {
           created_at: string
           customer_id: string
           id: number
-          qr_code: string | null
           verified_by: string | null
         }
         Insert: {
@@ -80,7 +85,6 @@ export type Database = {
           created_at?: string
           customer_id: string
           id?: number
-          qr_code?: string | null
           verified_by?: string | null
         }
         Update: {
@@ -90,7 +94,6 @@ export type Database = {
           created_at?: string
           customer_id?: string
           id?: number
-          qr_code?: string | null
           verified_by?: string | null
         }
         Relationships: [
@@ -299,7 +302,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      validate_qr_code: {
+        Args: { qr_code_input: string }
+        Returns: {
+          booking_id: number
+          customer_id: string
+          class_id: number
+          is_valid: boolean
+          error_message: string
+        }[]
+      }
     }
     Enums: {
       booking_status: "confirmed" | "cancelled" | "waitlisted" | "completed"
