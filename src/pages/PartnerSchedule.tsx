@@ -19,7 +19,7 @@ const PartnerSchedule = () => {
     if (!isAuthenticated || profile?.role !== 'partner') {
       navigate('/auth');
     }
-  }, [isAuthenticated, user, navigate]);
+  }, [isAuthenticated, profile?.role, navigate]);
 
   const [schedule, setSchedule] = useState({
     monday: { enabled: true, open: '06:00', close: '22:00' },

@@ -15,7 +15,7 @@ const PartnerDashboard = () => {
     if (!isAuthenticated || profile?.role !== 'partner') {
       navigate('/auth');
     }
-  }, [isAuthenticated, user, navigate]);
+  }, [isAuthenticated, profile?.role, navigate]);
 
   if (!profile) return null;
 

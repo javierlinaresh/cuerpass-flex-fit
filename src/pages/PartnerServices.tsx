@@ -20,7 +20,7 @@ const PartnerServices = () => {
     if (!isAuthenticated || profile?.role !== 'partner') {
       navigate('/auth');
     }
-  }, [isAuthenticated, user, navigate]);
+  }, [isAuthenticated, profile?.role, navigate]);
 
   const [services, setServices] = useState([
     {

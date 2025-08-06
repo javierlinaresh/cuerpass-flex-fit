@@ -5,6 +5,26 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
+interface Business {
+  id: number;
+  name: string;
+  type: string;
+  rating: number;
+  reviews: number;
+  image: string;
+  location: string;
+  services: Array<{
+    name: string;
+    credits: number;
+    instructor?: string;
+    barber?: string;
+    therapist?: string;
+    note?: string;
+  }>;
+  features: string[];
+  category: string;
+}
+
 const businesses = [
   {
     id: 1,
@@ -108,7 +128,7 @@ const FeaturedBusinesses = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
 
-  const handleBusinessClick = (business: any) => {
+  const handleBusinessClick = (business: Business) => {
     navigate('/servicios');
   };
 

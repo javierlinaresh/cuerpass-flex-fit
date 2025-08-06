@@ -2,8 +2,21 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
+interface Center {
+  id: number;
+  name: string;
+  type: string;
+  rating: number;
+  reviews: number;
+  image: string;
+  location: string;
+  description: string;
+  amenities?: string[];
+  features: string[];
+}
+
 interface CenterFeaturesProps {
-  center: any;
+  center: Center;
 }
 
 const CenterFeatures = ({ center }: CenterFeaturesProps) => {

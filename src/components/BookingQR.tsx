@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import QRCode from 'qrcode';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
@@ -21,14 +21,7 @@ export function BookingQR({ booking, onRefresh }: BookingQRProps) {
   const [qrDataUrl, setQrDataUrl] = useState<string>('');
   const [isExpired, setIsExpired] = useState(false);
 
-  useEffect(() => {
-    if (booking.qr_code) {
-      generateQR();
-    }
-    checkExpiration();
-  }, [booking.qr_code, booking.qr_expires_at]);
-
-  const generateQR = async () => {
+  const generateQR = useCallback(async () => {
     try {
       const url = await QRCode.toDataURL(booking.qr_code, {
         width: 256,
@@ -42,13 +35,20 @@ export function BookingQR({ booking, onRefresh }: BookingQRProps) {
     } catch (error) {
       console.error('Error generating QR code:', error);
     }
-  };
+  }, [booking.qr_code]);
 
-  const checkExpiration = () => {
+  const checkExpiration = useCallback(() => {
     const expirationDate = new Date(booking.qr_expires_at);
     const now = new Date();
     setIsExpired(now > expirationDate);
-  };
+  }, [booking.qr_expires_at]);
+
+  useEffect(() => {
+    if (booking.qr_code) {
+      generateQR();
+    }
+    checkExpiration();
+  }, [booking.qr_code, booking.qr_expires_at, generateQR, checkExpiration]);
 
   const downloadQR = () => {
     if (qrDataUrl) {

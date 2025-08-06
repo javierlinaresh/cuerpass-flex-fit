@@ -19,19 +19,6 @@ const Profile = () => {
     birthDate: ""
   });
 
-  useEffect(() => {
-    if (profile) {
-      setFormData({
-        name: profile.full_name || "",
-        email: profile.id || "", // User email from auth
-        phone: profile.phone || "",
-        birthDate: ""
-      });
-    }
-  }, [profile]);
-
-  if (loading || !profile) return null;
-
   const [passwordData, setPasswordData] = useState({
     current: "",
     new: "",
@@ -44,6 +31,19 @@ const Profile = () => {
     push: true,
     marketing: false
   });
+
+  useEffect(() => {
+    if (profile) {
+      setFormData({
+        name: profile.full_name || "",
+        email: profile.id || "", // User email from auth
+        phone: profile.phone || "",
+        birthDate: ""
+      });
+    }
+  }, [profile]);
+
+  if (loading || !profile) return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({

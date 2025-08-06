@@ -22,7 +22,7 @@ interface AuthContextType {
   user: User | null;
   profile: Profile | null;
   session: Session | null;
-  login: (email: string, password: string) => Promise<{ error?: any }>;
+  login: (email: string, password: string) => Promise<{ error?: Error | null }>;
   register: (data: {
     email: string;
     password: string;
@@ -30,7 +30,7 @@ interface AuthContextType {
     username: string;
     role: 'customer' | 'partner';
     business_name?: string;
-  }) => Promise<{ error?: any }>;
+  }) => Promise<{ error?: Error | null }>;
   logout: () => Promise<void>;
   isAuthenticated: boolean;
   loading: boolean;

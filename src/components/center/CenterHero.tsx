@@ -2,8 +2,20 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
+interface Center {
+  id: number;
+  name: string;
+  type: string;
+  rating: number;
+  reviews: number;
+  image: string;
+  location: string;
+  description: string;
+  amenities?: string[];
+}
+
 interface CenterHeroProps {
-  center: any;
+  center: Center;
 }
 
 const CenterHero = ({ center }: CenterHeroProps) => {
