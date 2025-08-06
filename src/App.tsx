@@ -31,6 +31,7 @@ import CorporatePlans from "./pages/CorporatePlans";
 import CorporateContact from "./pages/CorporateContact";
 import PlanUpgrade from "./pages/PlanUpgrade";
 import Pricing from "./pages/Pricing";
+import Membership from "./pages/Membership";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/como-funciona" element={<HowItWorks />} />
             <Route path="/empresas" element={<ForCompanies />} />
             <Route path="/precios" element={<Pricing />} />
+            <Route path="/mi-membresia" element={<ProtectedRoute requiredRole="customer"><Membership /></ProtectedRoute>} />
             <Route path="/empresas/planes" element={<CorporatePlans />} />
             <Route path="/empresas/contacto" element={<CorporateContact />} />
             <Route path="/socios" element={<ForPartners />} />

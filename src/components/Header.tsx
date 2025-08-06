@@ -47,9 +47,15 @@ const Header = () => {
             <Link to="/como-funciona" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
               Cómo Funciona
             </Link>
-            <Link to="/precios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
-              Precios
-            </Link>
+            {isAuthenticated ? (
+              <Link to="/mi-membresia" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
+                Mi Membresía
+              </Link>
+            ) : (
+              <Link to="/precios" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
+                Precios
+              </Link>
+            )}
             {!isAuthenticated && (
               <>
                 <Link to="/empresas" className="text-gray-600 hover:text-cuerpass-600 font-medium transition-colors">
@@ -145,9 +151,15 @@ const Header = () => {
               <Link to="/como-funciona" className="text-gray-600 hover:text-cuerpass-600 font-medium">
                 Cómo Funciona
               </Link>
-              <Link to="/precios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
-                Precios
-              </Link>
+              {isAuthenticated ? (
+                <Link to="/mi-membresia" className="text-gray-600 hover:text-cuerpass-600 font-medium">
+                  Mi Membresía
+                </Link>
+              ) : (
+                <Link to="/precios" className="text-gray-600 hover:text-cuerpass-600 font-medium">
+                  Precios
+                </Link>
+              )}
               {!isAuthenticated && (
                 <>
                   <Link to="/empresas" className="text-gray-600 hover:text-cuerpass-600 font-medium">

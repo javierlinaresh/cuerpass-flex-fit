@@ -1,9 +1,7 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import BenefitsSection from "@/components/BenefitsSection";
+import HowItWorksSection from "@/components/HowItWorksSection";
 import Categories from "@/components/Categories";
 import FeaturedBusinesses from "@/components/FeaturedBusinesses";
 import TrustedCompanies from "@/components/TrustedCompanies";
@@ -14,6 +12,8 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
       <Header />
       <Hero />
+      <BenefitsSection />
+      <HowItWorksSection />
       <Categories />
       <FeaturedBusinesses />
       <TrustedCompanies />
