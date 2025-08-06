@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -12,7 +12,7 @@ import Header from '@/components/Header';
 
 export default function Auth() {
   const navigate = useNavigate();
-  const { login, register, isAuthenticated } = useAuth();
+  const { login, register, isAuthenticated, loading } = useAuth();
   const { toast } = useToast();
   
   const [loginData, setLoginData] = useState({
@@ -32,11 +32,12 @@ export default function Auth() {
   
   const [isLoading, setIsLoading] = useState(false);
 
-  // Redirect if already authenticated
-  if (isAuthenticated) {
-    navigate('/dashboard');
-    return null;
-  }
+  // Proper redirect handling with useEffect
+  useEffect(() => {
+    if (!loading && isAuthenticated) {
+      navigate('/', { replace: true });
+    }
+  }, [isAuthenticated, loading, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,7 +57,7 @@ export default function Auth() {
           title: "¡Bienvenido!",
           description: "Has iniciado sesión correctamente",
         });
-        navigate('/dashboard');
+        navigate('/', { replace: true });
       }
     } catch (error) {
       toast({
@@ -135,6 +136,15 @@ export default function Auth() {
       setIsLoading(false);
     }
   };
+
+  // Show loading spinner while checking auth state
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cuerpass-600"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted">
