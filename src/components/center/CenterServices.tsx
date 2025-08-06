@@ -3,9 +3,38 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
+interface Service {
+  name: string;
+  description: string;
+  credits: number;
+  instructor?: string;
+  barber?: string;
+  therapist?: string;
+  coach?: string;
+  stylist?: string;
+  esthetician?: string;
+}
+
+interface Center {
+  id: number;
+  name: string;
+  type: string;
+  rating: number;
+  reviews: number;
+  image: string;
+  location: string;
+  description: string;
+  amenities?: string[];
+  features: string[];
+  gallery?: string[];
+  phone: string;
+  hours: string;
+  services: Service[];
+}
+
 interface CenterServicesProps {
-  center: any;
-  onReservation: (service: any) => void;
+  center: Center;
+  onReservation: (service: Service) => void;
 }
 
 const CenterServices = ({ center, onReservation }: CenterServicesProps) => {
@@ -16,7 +45,7 @@ const CenterServices = ({ center, onReservation }: CenterServicesProps) => {
           Servicios Disponibles
         </h2>
         <div className="space-y-4">
-          {center.services.map((service: any, index: number) => (
+          {center.services.map((service: Service, index: number) => (
             <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
               <div className="flex-1">
                 <h3 className="font-semibold text-gray-900 mb-1">

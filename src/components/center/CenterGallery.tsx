@@ -1,8 +1,22 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 
+interface Center {
+  id: number;
+  name: string;
+  type: string;
+  rating: number;
+  reviews: number;
+  image: string;
+  location: string;
+  description: string;
+  amenities?: string[];
+  features: string[];
+  gallery?: string[];
+}
+
 interface CenterGalleryProps {
-  center: any;
+  center: Center;
 }
 
 const CenterGallery = ({ center }: CenterGalleryProps) => {

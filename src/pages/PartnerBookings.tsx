@@ -17,7 +17,7 @@ const PartnerBookings = () => {
     if (!isAuthenticated || profile?.role !== 'partner') {
       navigate('/auth');
     }
-  }, [isAuthenticated, user, navigate]);
+  }, [isAuthenticated, profile?.role, navigate]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("todos");

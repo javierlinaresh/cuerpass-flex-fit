@@ -2,8 +2,16 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+interface User {
+  id: string;
+  full_name?: string;
+  credits_remaining?: number;
+  email?: string;
+  credits?: number;
+}
+
 interface UserCreditsProps {
-  user: any;
+  user: User;
 }
 
 const UserCredits = ({ user }: UserCreditsProps) => {
