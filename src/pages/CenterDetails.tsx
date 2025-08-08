@@ -23,7 +23,7 @@ interface Service {
 }
 
 interface Center {
-  id: string;
+  id: number;
   name: string;
   type: string;
   category: string;
@@ -43,7 +43,7 @@ interface Center {
 // Mock data - en producción vendría de una API
 const centersData: Record<string, Center> = {
   "1": {
-    id: "1",
+    id: 1,
     name: "Gold's Gym Las Mercedes",
     type: "Gimnasio",
     category: "gimnasios",
