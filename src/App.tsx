@@ -62,7 +62,7 @@ const App = () => (
             <Route path="/actualizar-plan" element={<ProtectedRoute requiredRole="customer"><PlanUpgrade /></ProtectedRoute>} />
             <Route path="/servicios" element={<Services />} />
             <Route path="/servicios/:categoria" element={<ServicesByCategory />} />
-            <Route path="/centro/:id" element={<ProtectedRoute requiredRole="customer"><CenterDetails /></ProtectedRoute>} />
+            <Route path="/centro/:id" element={<CenterDetails />} />
             <Route path="/socios/login" element={<PartnerLogin />} />
             <Route path="/socios/registro" element={<PartnerRegister />} />
             <Route path="/socios/dashboard" element={<PartnerDashboard />} />

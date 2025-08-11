@@ -22,7 +22,7 @@ const UserCredits = ({ user }: UserCreditsProps) => {
           Tus Créditos
         </h3>
         <div className="text-3xl font-bold mb-2">
-          {user.credits}
+          {user.credits_remaining ?? 0}
         </div>
         <p className="text-sm opacity-90 mb-4">
           Créditos disponibles
