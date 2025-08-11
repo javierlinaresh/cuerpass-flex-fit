@@ -180,6 +180,105 @@ export type Database = {
           },
         ]
       }
+      companies: {
+        Row: {
+          contact_email: string | null
+          contact_name: string | null
+          created_at: string
+          id: string
+          name: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          contact_email?: string | null
+          contact_name?: string | null
+          created_at?: string
+          id?: string
+          name: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          contact_email?: string | null
+          contact_name?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      company_members: {
+        Row: {
+          company_id: string
+          created_at: string
+          id: string
+          is_active: boolean
+          role: string
+          user_id: string
+        }
+        Insert: {
+          company_id: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          role?: string
+          user_id: string
+        }
+        Update: {
+          company_id?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "company_members_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "company_members_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      credit_ledger: {
+        Row: {
+          booking_id: number | null
+          created_at: string
+          delta: number
+          id: number
+          reason: string
+          user_id: string
+        }
+        Insert: {
+          booking_id?: number | null
+          created_at?: string
+          delta: number
+          id?: number
+          reason: string
+          user_id: string
+        }
+        Update: {
+          booking_id?: number | null
+          created_at?: string
+          delta?: number
+          id?: number
+          reason?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       "Cuerpass Socios": {
         Row: {
           created_at: string
@@ -297,11 +396,36 @@ export type Database = {
           },
         ]
       }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      has_role: {
+        Args: {
+          _user_id: string
+          _role: Database["public"]["Enums"]["app_role"]
+        }
+        Returns: boolean
+      }
       validate_qr_code: {
         Args: { qr_code_input: string }
         Returns: {
@@ -314,6 +438,7 @@ export type Database = {
       }
     }
     Enums: {
+      app_role: "admin"
       booking_status: "confirmed" | "cancelled" | "waitlisted" | "completed"
       membership_type:
         | "basic_monthly"
@@ -449,6 +574,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      app_role: ["admin"],
       booking_status: ["confirmed", "cancelled", "waitlisted", "completed"],
       membership_type: [
         "basic_monthly",
