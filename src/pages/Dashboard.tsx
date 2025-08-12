@@ -1,4 +1,5 @@
 
+import { useEffect } from "react";
 import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
@@ -10,6 +11,27 @@ import { BookingsList } from "@/components/BookingsList";
 const Dashboard = () => {
   const { profile, loading } = useAuthRedirect('customer');
   const navigate = useNavigate();
+
+  // SEO tags for Locker
+  useEffect(() => {
+    document.title = 'Locker Cuerpass: Créditos, Reservas y Promos';
+    const desc = 'Tu locker: créditos disponibles, reservas, promociones y estudios para entrenar con Cuerpass.';
+    let m = document.querySelector('meta[name="description"]');
+    if (!m) {
+      m = document.createElement('meta');
+      m.setAttribute('name', 'description');
+      document.head.appendChild(m);
+    }
+    m.setAttribute('content', desc);
+
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', window.location.origin + '/dashboard');
+  }, []);
 
   if (loading || !profile) return null;
 
@@ -78,6 +100,36 @@ const Dashboard = () => {
           </Card>
         </div>
 
+        {/* Ofertas y Promociones */}
+        <Card className="border-0 shadow-lg mb-8">
+          <CardHeader>
+            <CardTitle className="font-display text-xl">Ofertas y Promociones</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="p-4 rounded-lg bg-muted">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-gray-600">Bienvenida</p>
+                    <p className="font-semibold">2 créditos extra</p>
+                  </div>
+                  <Badge>Nuevo</Badge>
+                </div>
+                <Button className="mt-3" onClick={() => navigate('/precios')}>Aprovechar</Button>
+              </div>
+              <div className="p-4 rounded-lg bg-muted">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-gray-600">Studios Destacados</p>
+                    <p className="font-semibold">Hasta -20% en créditos</p>
+                  </div>
+                </div>
+                <Button variant="outline" className="mt-3" onClick={() => navigate('/servicios')}>Explorar Estudios</Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Reservas con QR */}
           <div className="lg:col-span-2">
@@ -107,6 +159,12 @@ const Dashboard = () => {
                   onClick={() => navigate('/servicios')}
                 >
                   Explorar Centros
+                </Button>
+                <Button 
+                  className="w-full"
+                  onClick={() => navigate('/checkout')}
+                >
+                  Comprar Créditos
                 </Button>
                 <Button 
                   variant="outline" 

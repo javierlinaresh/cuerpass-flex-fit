@@ -35,7 +35,7 @@ export default function Auth() {
   // Proper redirect handling with useEffect
   useEffect(() => {
     if (!loading && isAuthenticated) {
-      navigate('/', { replace: true });
+      navigate('/dashboard', { replace: true });
     }
   }, [isAuthenticated, loading, navigate]);
 
@@ -57,7 +57,7 @@ export default function Auth() {
           title: "¡Bienvenido!",
           description: "Has iniciado sesión correctamente",
         });
-        navigate('/', { replace: true });
+        navigate('/dashboard', { replace: true });
       }
     } catch (error) {
       toast({
