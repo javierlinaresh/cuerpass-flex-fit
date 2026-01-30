@@ -17,24 +17,24 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 21 90% 48%;
+    --primary: 16 96% 48%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 44 35% 92%;
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 44 35% 92%;
+    --muted-foreground: 0 0% 35%;
 
-    --accent: 21 90% 48%;
+    --accent: 23 97% 48%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 21 90% 48%;
+    --border: 44 20% 88%;
+    --input: 44 20% 88%;
+    --ring: 16 96% 48%;
 
     --radius: 0.75rem;
 
@@ -55,19 +55,19 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 21 90% 48%;
+    --primary: 16 96% 48%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 21 90% 48%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 44 35% 92%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 23 97% 48%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 21 90% 48%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 16 96% 48%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -89,18 +89,22 @@
   }
 
   .gradient-primary {
-    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    background: linear-gradient(135deg, #F28705 0%, #F24405 100%);
   }
 
   .gradient-coral {
-    background: linear-gradient(135deg, #f08650 0%, #e16638 100%);
+    background: linear-gradient(135deg, #F25C05 0%, #F24405 100%);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    background: linear-gradient(135deg, #F28705 0%, #F24405 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  .logo-gradient {
+    background: linear-gradient(180deg, #F2B705 0%, #F24405 100%);
   }
 }
 
