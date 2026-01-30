@@ -225,15 +225,16 @@ const Services = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
+    <div className="min-h-screen bg-rice-100">
       <Header />
       
       <div className="container max-w-7xl mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <h1 className="font-display font-bold text-3xl md:text-4xl text-gray-900 mb-4">
+        {/* Hero Banner with Black */}
+        <div className="bg-black text-white rounded-2xl p-8 mb-12">
+          <h1 className="font-display font-bold text-3xl md:text-4xl mb-4">
             Todos los Servicios
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl">
             Explora todos nuestros centros afiliados y encuentra el perfecto para ti
           </p>
         </div>
@@ -241,23 +242,23 @@ const Services = () => {
         {/* Ofertas del Día - Solo para usuarios autenticados */}
         {isAuthenticated && (
           <div className="mb-8">
-            <div className="bg-gradient-to-r from-orange-400 to-red-500 rounded-2xl p-6 text-white mb-6">
+            <div className="bg-gradient-to-r from-cuerpass-500 to-cuerpass-700 rounded-2xl p-6 text-white mb-6">
               <h2 className="font-display font-bold text-2xl mb-4">🔥 Ofertas del Día</h2>
               <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-white/20 rounded-lg p-4">
+                <div className="bg-black/30 rounded-lg p-4">
                   <h3 className="font-semibold mb-2">Gold's Gym - Day Pass</h3>
                   <p className="text-sm mb-2">Solo por hoy: <span className="line-through">3 créditos</span> <span className="font-bold">2 créditos</span></p>
-                  <Badge className="bg-yellow-400 text-yellow-900">33% OFF</Badge>
+                  <Badge className="bg-cuerpass-400 text-black">33% OFF</Badge>
                 </div>
-                <div className="bg-white/20 rounded-lg p-4">
+                <div className="bg-black/30 rounded-lg p-4">
                   <h3 className="font-semibold mb-2">Zen Spa - Masaje Relajante</h3>
                   <p className="text-sm mb-2">Oferta especial: <span className="line-through">4 créditos</span> <span className="font-bold">3 créditos</span></p>
-                  <Badge className="bg-yellow-400 text-yellow-900">25% OFF</Badge>
+                  <Badge className="bg-cuerpass-400 text-black">25% OFF</Badge>
                 </div>
-                <div className="bg-white/20 rounded-lg p-4">
+                <div className="bg-black/30 rounded-lg p-4">
                   <h3 className="font-semibold mb-2">Club Pádel - Cancha + Raquetas</h3>
                   <p className="text-sm mb-2">Pack combo: <span className="line-through">5 créditos</span> <span className="font-bold">4 créditos</span></p>
-                  <Badge className="bg-yellow-400 text-yellow-900">20% OFF</Badge>
+                  <Badge className="bg-cuerpass-400 text-black">20% OFF</Badge>
                 </div>
               </div>
             </div>
@@ -301,7 +302,7 @@ const Services = () => {
         {/* Results */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredBusinesses.map((business) => (
-            <Card key={business.id} className="card-hover border-0 shadow-lg overflow-hidden">
+            <Card key={business.id} className="card-hover border-0 shadow-lg overflow-hidden bg-white">
               <div className="relative">
                 <img 
                   src={business.image} 

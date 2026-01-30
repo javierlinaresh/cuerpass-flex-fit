@@ -1,19 +1,18 @@
 
 import { Button } from "@/components/ui/button";
+import CuerpassLogo from "./CuerpassLogo";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-black text-white">
       <div className="container max-w-7xl mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-2 mb-6">
-              <div className="w-8 h-8 bg-gradient-to-r from-cuerpass-500 to-coral-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">C</span>
-              </div>
-              <span className="font-display font-bold text-xl">
-                Cuerpass
+              <CuerpassLogo className="h-8 w-auto" />
+              <span className="font-display font-bold text-xl lowercase text-gradient">
+                cuerpass
               </span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
@@ -81,7 +80,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-gray-400 text-sm">
-              © 2025 Cuerpass. Todos los derechos reservados.
+              © 2025 cuerpass. Todos los derechos reservados.
             </div>
             <div className="flex items-center space-x-6 text-gray-400 text-sm">
               <span>🇻🇪 Hecho en Venezuela</span>

@@ -28,7 +28,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <CuerpassLogo className="h-8 w-auto" />
-            <span className="font-display font-bold text-xl tracking-tight lowercase text-gradient">
+            <span className="font-display font-bold text-xl tracking-tight lowercase text-black">
               cuerpass
             </span>
           </Link>
