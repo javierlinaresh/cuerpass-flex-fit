@@ -73,13 +73,13 @@ const Categories = () => {
   };
 
   return (
-    <section id="servicios" className="py-20 bg-white">
+    <section id="servicios" className="py-20">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="font-display font-bold text-3xl md:text-4xl text-gray-900 mb-4">
+          <h2 className="font-display font-bold text-3xl md:text-4xl text-white mb-4">
             Explora Nuestros Servicios
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Desde entrenamientos intensos hasta relajación total, y desde un partido de pádel hasta un día de spa. Encuentra exactamente lo que necesitas para tu bienestar y diversión.
           </p>
         </div>
@@ -88,7 +88,7 @@ const Categories = () => {
           {categories.map((category, index) => (
             <Card 
               key={category.id} 
-              className={`card-hover cursor-pointer border-0 shadow-lg animate-fade-in`}
+              className={`card-hover cursor-pointer border-0 shadow-lg animate-fade-in bg-neutral-800 hover:bg-neutral-700`}
               style={{ animationDelay: `${index * 0.1}s` }}
               onClick={() => handleCategoryClick(category.slug)}
             >
@@ -98,15 +98,15 @@ const Categories = () => {
                     {category.icon}
                   </div>
                   
-                  <h3 className="font-display font-semibold text-xl text-gray-900 mb-2">
+                  <h3 className="font-display font-semibold text-xl text-white mb-2">
                     {category.name}
                   </h3>
                   
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                  <p className="text-gray-400 text-sm mb-4 leading-relaxed">
                     {category.description}
                   </p>
                   
-                  <div className="text-cuerpass-600 font-medium text-sm">
+                  <div className="text-cuerpass-400 font-medium text-sm">
                     {category.count}
                   </div>
                 </div>
@@ -118,7 +118,7 @@ const Categories = () => {
         <div className="text-center mt-12">
           <p className="text-gray-500 mb-6">¿No encuentras lo que buscas?</p>
           <button 
-            className="text-cuerpass-600 hover:text-cuerpass-700 font-medium hover:underline transition-colors"
+            className="text-cuerpass-400 hover:text-cuerpass-300 font-medium hover:underline transition-colors"
             onClick={() => navigate('/contacto')}
           >
             Solicita un servicio específico →

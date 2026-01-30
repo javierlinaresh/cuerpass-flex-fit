@@ -42,20 +42,20 @@ const BenefitsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section className="py-20">
       <div className="container max-w-7xl mx-auto px-4">
         {/* Main Benefits */}
         <div className="text-center mb-16">
-          <Badge className="mb-6 bg-gradient-to-r from-cuerpass-100 to-blue-100 text-cuerpass-700 border-0">
+          <Badge className="mb-6 bg-cuerpass-500/20 text-cuerpass-400 border-0">
             ✨ Revolucionando el Bienestar en Venezuela
           </Badge>
-          <h2 className="font-display font-bold text-3xl md:text-4xl text-gray-900 mb-6">
+          <h2 className="font-display font-bold text-3xl md:text-4xl text-white mb-6">
             Una nueva forma de vivir el{" "}
-            <span className="text-gradient bg-gradient-to-r from-cuerpass-600 to-blue-600 bg-clip-text text-transparent">
+            <span className="text-gradient">
               bienestar
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             Cuerpass democratiza el acceso a servicios de bienestar premium en Venezuela. 
             Una plataforma que conecta personas y empresas con los mejores centros de la ciudad.
           </p>
@@ -65,23 +65,23 @@ const BenefitsSection = () => {
           {benefits.map((benefit, index) => (
             <Card 
               key={index} 
-              className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white hover:scale-105"
+              className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-neutral-800 hover:bg-neutral-700"
             >
               <CardContent className="p-8">
                 <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center">
+                  <div className="flex-shrink-0 w-16 h-16 bg-neutral-700 rounded-2xl flex items-center justify-center">
                     {benefit.icon}
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-display font-semibold text-xl text-gray-900 mb-3">
+                    <h3 className="font-display font-semibold text-xl text-white mb-3">
                       {benefit.title}
                     </h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">
+                    <p className="text-gray-400 mb-4 leading-relaxed">
                       {benefit.description}
                     </p>
                     <div className="flex items-center space-x-2">
-                      <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                      <span className="text-sm font-medium text-cuerpass-600">
+                      <Star className="w-4 h-4 text-cuerpass-500 fill-current" />
+                      <span className="text-sm font-medium text-cuerpass-400">
                         {benefit.stats}
                       </span>
                     </div>
@@ -95,10 +95,10 @@ const BenefitsSection = () => {
         {/* Use Cases */}
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h3 className="font-display font-bold text-2xl md:text-3xl text-gray-900 mb-6">
+            <h3 className="font-display font-bold text-2xl md:text-3xl text-white mb-6">
               Todo lo que necesitas para tu bienestar
             </h3>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+            <p className="text-lg text-gray-400 mb-8 leading-relaxed">
               Desde un entrenamiento matutino hasta una sesión de relajación nocturna. 
               Cuerpass te conecta con profesionales certificados en toda Caracas.
             </p>
@@ -106,10 +106,10 @@ const BenefitsSection = () => {
             <div className="grid gap-3">
               {useCases.map((useCase, index) => (
                 <div key={index} className="flex items-center space-x-3">
-                  <div className="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                    <Check className="w-4 h-4 text-green-600" />
+                  <div className="flex-shrink-0 w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center">
+                    <Check className="w-4 h-4 text-green-400" />
                   </div>
-                  <span className="text-gray-700">{useCase}</span>
+                  <span className="text-gray-300">{useCase}</span>
                 </div>
               ))}
             </div>

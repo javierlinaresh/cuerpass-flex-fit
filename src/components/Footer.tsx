@@ -4,7 +4,7 @@ import CuerpassLogo from "./CuerpassLogo";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white">
+    <footer className="bg-neutral-900 text-white">
       <div className="container max-w-7xl mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Brand Section */}
