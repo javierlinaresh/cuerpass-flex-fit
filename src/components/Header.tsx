@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { User, LogOut, Settings, Calendar } from 'lucide-react';
+import CuerpassLogo from './CuerpassLogo';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -21,22 +22,15 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-orange-100">
+    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-rice-100">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-cuerpass-500 to-coral-500 rounded-xl flex items-center justify-center shadow-lg">
-              <span className="text-white font-bold text-xl">C</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display font-bold text-xl text-gray-900">
-                Cuerpass
-              </span>
-              <span className="text-xs text-gray-500 -mt-1">
-                Servicios
-              </span>
-            </div>
+          <Link to="/" className="flex items-center space-x-2">
+            <CuerpassLogo className="h-8 w-auto" />
+            <span className="font-display font-bold text-xl tracking-tight lowercase text-gradient">
+              cuerpass
+            </span>
           </Link>
 
            {/* Desktop Navigation */}
